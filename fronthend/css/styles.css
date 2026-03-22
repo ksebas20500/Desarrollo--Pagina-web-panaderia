@@ -1,0 +1,528 @@
+/* --- VARIABLES DE COLOR Y FUENTES --- */
+:root {
+    --primary-brown: #8c4912;
+    --primary-brown-hover: #6e3b0e;
+    --highlight-gold: #dcb589;
+    --bg-cream: #FDFBF7;
+    --text-dark: #333333;
+    --text-light: #ffffff;
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+}
+
+/* Reseteo básico para que se vea igual en todos los navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-dark);
+}
+
+/* --- BARRA DE NAVEGACIÓN (HEADER) --- */
+/* --- BARRA DE NAVEGACIÓN (HEADER) --- */
+.header {
+    background-color: #F8F4EA;
+    /* Cambiamos a un crema más tostado, igual a la referencia */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    /* Sombra un poco más sutil */
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    padding: 8px 40px;
+    /* REDUCIDO: Antes era 15px, ahora es 8px para hacerlo más delgado */
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* El resto de tu código del logo, nav-links y btn-contact se queda exactamente igual */
+
+/* Contenedor del logo y texto */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Espacio exacto entre la imagen y el texto */
+    text-decoration: none;
+}
+
+/* Estilos solo para el texto "La Fábrica" */
+.logo span {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    /* REDUCIDO: Antes era 28px */
+    font-weight: normal;
+    color: var(--primary-brown);
+}
+
+/* Estilos para la imagen redonda */
+.logo-img {
+    height: 45px;
+    /* REDUCIDO: Antes era 60px */
+    width: 45px;
+    /* REDUCIDO: Antes era 60px */
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+
+/* Contenedor de los enlaces del menú */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    /* Le damos un poquitito más de respiro entre cada opción */
+    margin-left: auto;
+    margin-right: 50px;
+    /* ¡AQUÍ ESTÁ LA MAGIA! Aumentamos el margen para alejar el botón "Contáctanos" */
+}
+
+/* Estilo de la letra del menú */
+.nav-links a {
+    text-decoration: none;
+    color: #4a423e;
+    /* Usamos un gris/marrón muy oscuro en lugar de negro puro para más elegancia */
+    font-family: var(--font-sans);
+    /* Nos aseguramos de usar la fuente Inter */
+    font-size: 15px;
+    font-weight: 400;
+    /* Cambiamos a 400 (normal) para que la letra sea más fina y delicada */
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-brown);
+}
+
+/* Botón de contáctanos */
+/* Ajustamos el botón para que no infle el header */
+.btn-contact {
+    text-decoration: none;
+    background-color: var(--primary-brown);
+    color: var(--text-light);
+    padding: 8px 20px;
+    /* REDUCIDO: Antes era 10px 24px */
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    /* Un puntito más pequeño */
+    transition: background-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+.btn-contact:hover {
+    background-color: var(--primary-brown-hover);
+}
+
+/* --- SECCIÓN PRINCIPAL (HERO) --- */
+.hero {
+    position: relative;
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    /* Salimos de la carpeta 'css' y entramos a la carpeta 'img' */
+    background-image: url('../imagen/hero-bakery.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Oscurece el fondo */
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 20px;
+    margin-top: -50px;
+    /* Sube un poco el contenido visualmente */
+}
+
+.subtitle {
+    color: var(--highlight-gold);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.title {
+    color: var(--text-light);
+    font-family: var(--font-serif);
+    font-size: 64px;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.highlight {
+    color: var(--highlight-gold);
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-brown);
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-brown-hover);
+}
+
+.btn-secondary {
+    background-color: var(--text-light);
+    color: var(--text-dark);
+}
+
+.btn-secondary:hover {
+    background-color: #f0f0f0;
+}
+
+/* --- ICONO DE SCROLL ANIMADO --- */
+.scroll-icon {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.mouse {
+    width: 24px;
+    height: 36px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    animation: scroll 2s infinite;
+    /* Animación de la ruedita */
+}
+
+@keyframes scroll {
+    0% {
+        top: 6px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 18px;
+        opacity: 0;
+    }
+}
+
+/* --- SECCIÓN DE SERVICIOS --- */
+.services-section {
+    background-color: #F3EAE1;
+    /* Un crema un poco más oscuro que el header */
+    padding: 80px 40px;
+    text-align: center;
+}
+
+.services-header {
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    /* Centra el texto y da espacio abajo */
+}
+
+.section-subtitle {
+    color: var(--primary-brown);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.section-title {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    color: #2D241F;
+    /* Un marrón súper oscuro, casi negro */
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.section-description {
+    color: #665b55;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* La cuadrícula de 4 columnas para las tarjetas */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 columnas iguales */
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo de cada tarjeta blanca */
+.service-card {
+    background-color: #ffffff;
+    padding: 40px 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    /* Sombra muy suave */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+    /* Para la animación */
+}
+
+/* Efecto al pasar el mouse por encima de la tarjeta */
+.service-card:hover {
+    transform: translateY(-8px);
+}
+
+/* El círculo que envuelve al ícono */
+.icon-wrapper {
+    background-color: #F3EAE1;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--primary-brown);
+    /* Pinta los iconos SVG de marrón */
+}
+
+.service-card h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: #2D241F;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.service-card p {
+    color: #665b55;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* --- MENÚ DESPLEGABLE --- */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    padding: 10px 0;
+    /* Área de margen para que el mouse no pierda el hover */
+}
+
+.dropdown-menu {
+    display: none;
+    /* Oculto por defecto */
+    position: absolute;
+    top: 100%;
+    left: -10px;
+    background-color: #ffffff;
+    min-width: 160px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 20;
+    border: 1px solid #f0e9e2;
+}
+
+/* Mostrar el menú cuando el mouse pasa por encima del contenedor */
+.dropdown-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 24px;
+    color: var(--text-dark);
+    font-size: 15px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #FDFBF7;
+    color: var(--primary-brown);
+}
+
+/* --- SECCIÓN DE PRODUCTOS --- */
+.products-section {
+    background-color: var(--bg-cream);
+    /* Mismo fondo del hero */
+    padding: 80px 40px;
+}
+
+/* Usamos esta clase para centrar los títulos de las secciones */
+.section-header-center {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas iguales */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Añadimos esto para un movimiento suave */
+}
+
+/* NUEVO: Efecto al pasar el mouse sobre la tarjeta del producto */
+.product-card:hover {
+    transform: translateY(-10px);
+    /* Levanta la tarjeta 10 píxeles hacia arriba */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    /* Hace la sombra más grande para dar efecto 3D */
+}
+
+.product-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    /* Hace que el contenido ocupe el espacio restante */
+}
+
+.product-info h3 {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    color: #2D241F;
+    margin-bottom: 15px;
+}
+
+.product-desc {
+    color: #665b55;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.product-list {
+    list-style-type: none;
+    /* Quitamos las viñetas por defecto */
+    padding: 0;
+    margin-bottom: 30px;
+    flex-grow: 1;
+    /* Empuja el botón hacia abajo */
+}
+
+.product-list li {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #4a423e;
+}
+
+/* Viñeta personalizada (puntito marrón) */
+.product-list li::before {
+    content: "•";
+    color: var(--primary-brown);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-size: 18px;
+}
+
+/* Botón de Ver más */
+.btn-outline {
+    width: 100%;
+    background-color: #FDFBF7;
+    color: #2D241F;
+    border: 1px solid #e0d5cb;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-outline:hover {
+    background-color: #D4A373;
+    /* Un tono caramelo/dorado como en tu foto */
+    color: #2D241F;
+    /* Texto marrón muy oscuro para que resalte */
+    border-color: #D4A373;
+    /* El borde igual al fondo para que se vea sólido */
+}

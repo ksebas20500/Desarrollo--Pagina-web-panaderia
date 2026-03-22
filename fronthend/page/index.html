@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Fábrica | Panadería Artesanal</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-container">
+
+            <div class="logo">
+                <img src="../imagen/logo.png" alt="Logo La Fábrica" class="logo-img">
+                <span>La Fábrica</span>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#">Nosotros</a>
+                <a href="#">Sedes</a>
+                <a href="#">Eventos</a>
+
+                <div class="dropdown-container">
+                    <a href="#productos" class="dropdown">Productos <span class="arrow">▼</span></a>
+                    <div class="dropdown-menu">
+                        <a href="#panes">Panes</a>
+                        <a href="#tortas">Tortas</a>
+                        <a href="#postres">Postres</a>
+                    </div>
+                </div>
+            </nav>
+
+            <a href="#" class="btn-contact">Contáctanos</a>
+
+        </div>
+    </header>
+
+    <main>
+        <!-- Inicion-->
+        <section class="hero">
+            <div class="hero-overlay"></div>
+
+            <div class="hero-content">
+                <p class="subtitle">PANADERÍA ARTESANAL</p>
+                <h1 class="title">El arte de hornear <br> con <span class="highlight">pasión</span></h1>
+                <p class="description">En La Fábrica creamos panes, tortas y postres artesanales con ingredientes de
+                    primera calidad y recetas tradicionales que despiertan los sentidos.</p>
+
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary">Ver Productos</a>
+                    <a href="#" class="btn btn-secondary">Conoce más</a>
+                </div>
+            </div>
+
+            <div class="scroll-icon">
+                <div class="mouse"></div>
+            </div>
+        </section>
+        <!-- Productos -->
+        <section id="productos" class="products-section">
+            <div class="section-header-center">
+                <p class="section-subtitle">NUESTROS PRODUCTOS</p>
+                <h2 class="section-title">Hechos con amor y tradición</h2>
+                <p class="section-description">Cada producto es elaborado artesanalmente siguiendo recetas tradicionales
+                    y utilizando los mejores ingredientes.</p>
+            </div>
+
+            <div class="products-grid">
+                <div class="product-card" id="panes">
+                    <img src="../imagen/bread.jpg" alt="Panes artesanales" class="product-image">
+                    <div class="product-info">
+                        <h3>Panes</h3>
+                        <p class="product-desc">Panes artesanales horneados diariamente con masa madre y harinas
+                            seleccionadas. Desde baguettes crujientes hasta panes integrales nutritivos.</p>
+                        <ul class="product-list">
+                            <li>Pan de masa madre</li>
+                            <li>Baguette francesa</li>
+                            <li>Pan integral</li>
+                            <li>Ciabatta</li>
+                        </ul>
+                        <button class="btn-outline">Ver más <span>→</span></button>
+                    </div>
+                </div>
+
+                <div class="product-card" id="tortas">
+                    <img src="../imagen/cakes.jpg" alt="Tortas" class="product-image">
+                    <div class="product-info">
+                        <h3>Tortas</h3>
+                        <p class="product-desc">Tortas elaboradas con amor para celebrar tus momentos especiales.
+                            Diseños personalizados y sabores inolvidables.</p>
+                        <ul class="product-list">
+                            <li>Torta de chocolate</li>
+                            <li>Red velvet</li>
+                            <li>Tres leches</li>
+                            <li>Tortas personalizadas</li>
+                        </ul>
+                        <button class="btn-outline">Ver más <span>→</span></button>
+                    </div>
+                </div>
+
+                <div class="product-card" id="postres">
+                    <img src="../imagen/desserts.jpg" alt="Postres" class="product-image">
+                    <div class="product-info">
+                        <h3>Postres</h3>
+                        <p class="product-desc">Deliciosos postres y pastelería fina que endulzan cualquier ocasión.
+                            Croissants, éclairs y mucho más.</p>
+                        <ul class="product-list">
+                            <li>Croissants</li>
+                            <li>Éclairs</li>
+                            <li>Tartaletas</li>
+                            <li>Galletas artesanales</li>
+                        </ul>
+                        <button class="btn-outline">Ver más <span>→</span></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Servicios -->
+        <section id="servicios" class="services-section">
+            <div class="services-header">
+                <p class="section-subtitle">Nuestros Servicios</p>
+                <h2 class="section-title">Lo que nos hace especiales</h2>
+                <p class="section-description">Más que una panadería, somos un espacio donde la tradición y la
+                    innovación se unen para crear experiencias únicas.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="7"></circle>
+                            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Calidad Premium</h3>
+                    <p>Utilizamos ingredientes de primera calidad y técnicas artesanales para garantizar productos
+                        excepcionales.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Productos Frescos</h3>
+                    <p>Horneamos todos los días para ofrecerte productos recién hechos con el mejor sabor y textura.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </div>
+                    <h3>Servicio a Domicilio</h3>
+                    <p>Llevamos nuestros productos hasta la puerta de tu casa. Comodidad sin perder frescura.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="icon-wrapper">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3>Pedidos Especiales</h3>
+                    <p>Diseñamos tortas y productos personalizados para tus eventos y celebraciones especiales.</p>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
