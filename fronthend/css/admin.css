@@ -1,0 +1,649 @@
+/* --- VARIABLES Y RESETEO --- */
+/* Sobrescribe el centrado del body solo para el dashboard */
+.dashboard-body {
+    display: block;
+    height: 100vh;
+    overflow: hidden;
+    /* Evita doble scroll */
+}
+
+:root {
+    --primary-brown: #8C4A1D;
+    /* Marrón del botón e ícono */
+    --bg-cream: #F3EAE1;
+    /* Fondo crema */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-cream);
+    font-family: var(--font-sans);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* Ocupa el 100% de la altura de la pantalla */
+}
+
+/* --- TARJETA DE LOGIN --- */
+.login-wrapper {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    padding: 45px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+/* --- CABECERA --- */
+.login-header {
+    margin-bottom: 30px;
+}
+
+.icon-circle {
+    background-color: var(--primary-brown);
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px auto;
+}
+
+.login-header h2 {
+    font-family: var(--font-serif);
+    color: #2D241F;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.login-header p {
+    color: #8c827b;
+    font-size: 13px;
+}
+
+/* --- FORMULARIO --- */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2D241F;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #E5D8CD;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: var(--font-sans);
+    color: #2D241F;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary-brown);
+    /* El borde cambia a marrón al escribir */
+}
+
+/* --- BOTÓN Y ENLACES --- */
+.btn-login {
+    background-color: var(--primary-brown);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #703b17;
+    /* Se oscurece un poco al pasar el ratón */
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    color: #8c827b;
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: var(--primary-brown);
+}
+
+/* =========================================
+   ESTILOS DEL DASHBOARD
+   ========================================= */
+
+.admin-layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 260px;
+    background-color: #ffffff;
+    border-right: 1px solid #E5D8CD;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    padding-left: 10px;
+}
+
+.icon-circle-small {
+    background-color: var(--primary-brown);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-header h3 {
+    font-family: var(--font-serif);
+    color: #2D241F;
+    font-size: 20px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+    /* Empuja el botón de cerrar sesión hacia abajo */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #665b55;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: #FDFBF7;
+    color: var(--primary-brown);
+}
+
+.nav-item.active {
+    background-color: var(--primary-brown);
+    color: #ffffff;
+}
+
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    text-decoration: none;
+    color: #8c827b;
+    font-size: 14px;
+    border-top: 1px solid #E5D8CD;
+    transition: color 0.3s ease;
+}
+
+.logout-link:hover {
+    color: #d93838;
+    /* Rojo al pasar el ratón para indicar salida */
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+    flex-grow: 1;
+    background-color: var(--bg-cream);
+    padding: 40px 50px;
+    overflow-y: auto;
+    /* Permite scroll si hay mucho contenido */
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    font-family: var(--font-serif);
+    color: #2D241F;
+    font-size: 28px;
+}
+
+.btn-primary {
+    background-color: var(--primary-brown);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #703b17;
+}
+
+/* --- TARJETAS DE ESTADÍSTICAS --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #E5D8CD;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.stat-title {
+    font-size: 13px;
+    color: #665b55;
+    font-weight: 500;
+}
+
+.stat-icon.brown {
+    color: var(--primary-brown);
+}
+
+.stat-icon.orange {
+    color: #d97706;
+}
+
+.stat-icon.pink {
+    color: #db2777;
+}
+
+.stat-icon.red {
+    color: #dc2626;
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2D241F;
+}
+
+/* --- PANEL DE PRODUCTOS --- */
+.dashboard-panel {
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid #E5D8CD;
+    padding: 25px;
+    min-height: 400px;
+}
+
+.panel-title {
+    font-size: 16px;
+    color: #2D241F;
+    margin-bottom: 20px;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    gap: 15px;
+    text-align: center;
+}
+
+.empty-state p {
+    color: #665b55;
+    font-size: 15px;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #E5D8CD;
+    color: #2D241F;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    border-color: var(--primary-brown);
+    color: var(--primary-brown);
+}
+
+.btn-primary {
+    background-color: var(--primary-brown);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: background-color 0.3s;
+    /* --- LÍNEAS NUEVAS PARA ALINEAR EL ÍCONO --- */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* =========================================
+   FORMULARIO NUEVO PRODUCTO
+   ========================================= */
+
+.form-panel {
+    max-width: 650px;
+    /* Hace que la tarjeta no ocupe toda la pantalla de ancho */
+}
+
+.form-section-title {
+    font-size: 16px;
+    color: #2D241F;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    color: #2D241F;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 12px 15px;
+    border: 1px solid #E5D8CD;
+    border-radius: 6px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: #2D241F;
+    outline: none;
+    background-color: #ffffff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary-brown);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas iguales para Precio y Categoría */
+    gap: 20px;
+}
+
+/* Área de Subir Imagen */
+.image-upload-box {
+    border: 2px dashed #E5D8CD;
+    background-color: #FAF7F5;
+    border-radius: 8px;
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #8c827b;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.image-upload-box:hover {
+    border-color: var(--primary-brown);
+    background-color: #F3EAE1;
+}
+
+/* Contenedor del Interruptor (Toggle) */
+.toggle-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #E5D8CD;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+.toggle-text h4 {
+    font-size: 14px;
+    color: #2D241F;
+    margin-bottom: 3px;
+}
+
+.toggle-text p {
+    font-size: 13px;
+    color: #8c827b;
+}
+
+/* El Interruptor (Toggle Switch) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+/* Color marrón cuando está activo */
+input:checked+.slider {
+    background-color: var(--primary-brown);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+/* Botones inferiores */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.btn-muted {
+    background-color: #B89374;
+    /* Un marrón más suave como en la foto */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-muted:hover {
+    background-color: var(--primary-brown);
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO (MÓVILES Y TABLETS) - ADMIN
+   ========================================= */
+@media (max-width: 768px) {
+
+    /* Quitamos el bloqueo de scroll y cambiamos a columna */
+    .dashboard-body {
+        height: auto;
+        overflow: auto;
+    }
+
+    .admin-layout {
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* La barra lateral ahora va arriba horizontalmente */
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #E5D8CD;
+        padding: 15px 20px;
+    }
+
+    .sidebar-header {
+        margin-bottom: 20px;
+        justify-content: center;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .logout-link {
+        justify-content: center;
+        border-top: none;
+        padding-top: 5px;
+    }
+
+    /* Área principal */
+    .main-content {
+        padding: 20px;
+    }
+
+    .top-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .top-header .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Estadísticas: 2 columnas en celular se ven mejor que 1 */
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Formulario de Nuevo Producto */
+    .form-row {
+        grid-template-columns: 1fr;
+        /* Precio y Categoría se apilan */
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-muted,
+    .btn-outline {
+        width: 100%;
+    }
+}

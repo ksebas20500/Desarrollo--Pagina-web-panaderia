@@ -16,36 +16,66 @@
 </head>
 
 <body>
-
     <header class="header">
         <div class="header-container">
-
             <div class="logo">
                 <img src="../imagen/logo.png" alt="Logo La Fábrica" class="logo-img">
                 <span>La Fábrica</span>
             </div>
 
-            <nav class="nav-links">
-                <a href="#">Inicio</a>
-                <a href="#servicios">Servicios</a>
-                <a href="#">Nosotros</a>
-                <a href="#">Sedes</a>
-                <a href="#">Eventos</a>
+            <button class="mobile-menu-btn" id="open-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
 
-                <div class="dropdown-container">
-                    <a href="#productos" class="dropdown">Productos <span class="arrow">▼</span></a>
-                    <div class="dropdown-menu">
+            <div class="nav-wrapper" id="mobile-nav">
+
+                <div class="mobile-nav-header">
+                    <span class="logo-text-mobile">La Fábrica</span>
+                    <button class="close-menu-btn" id="close-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <nav class="nav-links">
+                    <a href="#">Inicio</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#sedes">Sedes</a>
+                    <a href="#eventos">Eventos</a>
+
+                    <div class="dropdown-container desktop-menu-item">
+                        <a href="#productos" class="dropdown">Productos <span class="arrow">▼</span></a>
+                        <div class="dropdown-menu">
+                            <a href="#panes">Panes</a>
+                            <a href="#tortas">Tortas</a>
+                            <a href="#postres">Postres</a>
+                        </div>
+                    </div>
+
+                    <div class="mobile-menu-item">
+                        <hr class="mobile-divider">
+                        <span class="mobile-category-title">Productos</span>
                         <a href="#panes">Panes</a>
                         <a href="#tortas">Tortas</a>
                         <a href="#postres">Postres</a>
                     </div>
-                </div>
-            </nav>
+                </nav>
 
-            <a href="#" class="btn-contact">Contáctanos</a>
-
+                <a href="#" class="btn-contact">Contáctanos</a>
+            </div>
         </div>
     </header>
+
+
 
     <main>
         <!-- Inicion-->
@@ -192,10 +222,310 @@
             </div>
         </section>
 
+        <!-- nosotros-->
+        <section id="nosotros" class="about-section">
+            <div class="about-container">
 
+                <div class="about-image-wrapper">
+                    <img src="../imagen/hero-bakery.jpg" alt="Interior de nuestra panadería artesanal"
+                        class="about-img">
+                </div>
+
+                <div class="about-content">
+                    <p class="section-subtitle">SOBRE NOSOTROS</p>
+                    <h2 class="about-title">Una tradición familiar que perdura</h2>
+
+                    <div class="about-text">
+                        <p><strong>La Fábrica</strong> nació hace más de 15 años con un sueño: llevar el auténtico sabor
+                            del pan artesanal a cada hogar. Lo que comenzó como una pequeña panadería familiar se ha
+                            convertido en un referente de calidad y tradición.</p>
+                        <p>Nuestros maestros panaderos combinan técnicas ancestrales con innovación, seleccionando
+                            cuidadosamente cada ingrediente para crear productos que despiertan los sentidos y evocan
+                            los sabores de antaño.</p>
+                        <p>Cada pan, torta y postre que sale de nuestros hornos lleva consigo el compromiso de
+                            excelencia que nos caracteriza.</p>
+                    </div>
+
+                    <hr class="about-divider">
+
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label">Años de<br>experiencia</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Productos<br>únicos</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Clientes<br>felices</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Sedes<br>actuales</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- sedes -->
+        <section id="sedes" class="sedes-section">
+            <div class="section-header-center">
+                <p class="section-subtitle">NUESTRAS SEDES</p>
+                <h2 class="section-title">Encuéntranos cerca de ti</h2>
+                <p class="section-description">Con 3 sedes estratégicamente ubicadas en Cúcuta, siempre tendrás una
+                    Fábrica cerca para disfrutar de nuestros productos frescos.</p>
+            </div>
+
+            <div class="sedes-grid">
+                <div class="sede-card">
+                    <h3>Sede Aniversario 2</h3>
+                    <ul class="sede-info">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Barrio Aniversario 2, Cúcuta</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <span>+57 300 000 0000</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Lun - Dom: 6:00 AM - 9:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sede-card">
+                    <h3>Sede García Herreros</h3>
+                    <ul class="sede-info">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Barrio García Herreros, Cúcuta</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <span>+57 300 000 0000</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Lun - Dom: 6:00 AM - 9:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sede-card">
+                    <h3>Sede Magdalena</h3>
+                    <ul class="sede-info">
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                            <span>Barrio Magdalena, Cúcuta</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg>
+                            <span>+57 300 000 0000</span>
+                        </li>
+                        <li>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Lun - Dom: 6:00 AM - 9:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Eventos -->
+        <section id="eventos" class="events-section">
+            <div class="section-header-center">
+                <p class="section-subtitle">EVENTOS</p>
+                <h2 class="section-title text-white">Celebra con nosotros</h2>
+                <p class="section-description text-light">Hacemos de cada evento una experiencia única con nuestros
+                    productos artesanales y servicio personalizado.</p>
+            </div>
+
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3>Eventos Corporativos</h3>
+                    <p>Servicio de catering para reuniones empresariales, conferencias y eventos especiales con
+                        productos premium.</p>
+                    <button class="btn-event">Cotizar</button>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2Z"></path>
+                            <path d="M12 3v4"></path>
+                            <path d="M8 4v3"></path>
+                            <path d="M16 4v3"></path>
+                            <path d="M2 13h20"></path>
+                        </svg>
+                    </div>
+                    <h3>Celebraciones Especiales</h3>
+                    <p>Bodas, quinceañeras, cumpleaños y más. Diseñamos tortas personalizadas para hacer tu evento
+                        inolvidable.</p>
+                    <button class="btn-event">Consultar</button>
+                </div>
+
+                <div class="event-card">
+                    <div class="event-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+                            <path d="M12 8v13"></path>
+                            <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+                            <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3>Mesas Dulces</h3>
+                    <p>Sorprende a tus invitados con una selección exquisita de tartaletas, postres y bocados en un
+                        montaje espectacular.</p>
+                    <button class="btn-event">Ver Opciones</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="footer-logo">La Fábrica</h3>
+                <p>Más de 15 años llevando el auténtico sabor del pan artesanal a cada hogar. Tradición, calidad y amor
+                    en cada producto.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/lafabricapanaderia/" target="_blank" rel="noopener noreferrer"
+                        aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+
+                    <a href="https://www.facebook.com/p/Panader%C3%ADa-La-F%C3%A1brica-100084716544791/" target="_blank"
+                        rel="noopener noreferrer" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#sedes">Sedes</a></li>
+                    <li><a href="#eventos">Eventos</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="#panes">Panes</a></li>
+                    <li><a href="#tortas">Tortas</a></li>
+                    <li><a href="#postres">Postres</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul class="contact-info">
+                    <li>📞 +57 300 123 4567</li>
+                    <li>✉️ info@lafabrica.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Fábrica. Todos los derechos reservados.</p>
+        </div>
+    </footer>
     </main>
 
     <script src="../js/script.js"></script>
+    <script>
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        // Al hacer clic en la hamburguesa, le añadimos la clase 'active' para que se muestre
+        openMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+
+        // Al hacer clic en la X, le quitamos la clase 'active' para ocultarlo
+        closeMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+    </script>
 </body>
 
 </html>

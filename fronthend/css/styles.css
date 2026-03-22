@@ -23,6 +23,19 @@ body {
 }
 
 /* --- BARRA DE NAVEGACIÓN (HEADER) --- */
+/* Ocultar elementos del menú móvil en PC */
+.mobile-menu-btn,
+.mobile-nav-header {
+    display: none;
+}
+
+.nav-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    /* Hace que ocupe el espacio restante */
+}
+
 /* --- BARRA DE NAVEGACIÓN (HEADER) --- */
 .header {
     background-color: #F8F4EA;
@@ -525,4 +538,672 @@ body {
     /* Texto marrón muy oscuro para que resalte */
     border-color: #D4A373;
     /* El borde igual al fondo para que se vea sólido */
+}
+
+/* --- SECCIÓN SOBRE NOSOTROS --- */
+.about-section {
+    background-color: var(--bg-cream);
+    padding: 100px 40px;
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Divide el contenedor en 2 columnas iguales */
+    gap: 60px;
+    /* Espacio entre la imagen y el texto */
+    align-items: center;
+    /* Centra el contenido verticalmente */
+}
+
+/* Estilos de la imagen */
+.about-img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    /* Bordes redondeados como en la foto */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    /* Sombra elegante */
+    object-fit: cover;
+}
+
+/* Textos de la columna derecha */
+.about-title {
+    font-family: var(--font-serif);
+    font-size: 42px;
+    color: #2D241F;
+    margin-bottom: 25px;
+    line-height: 1.2;
+}
+
+.about-text p {
+    color: #665b55;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.about-text strong {
+    color: #2D241F;
+    font-weight: 600;
+}
+
+/* Línea separadora */
+.about-divider {
+    border: none;
+    border-top: 1px solid #E5D8CD;
+    margin: 35px 0;
+}
+
+/* Cuadrícula de las estadísticas */
+.about-stats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stat-number {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--primary-brown);
+}
+
+.stat-label {
+    font-size: 13px;
+    color: #8c827b;
+    line-height: 1.4;
+}
+
+/* --- SECCIÓN DE SEDES --- */
+.sedes-section {
+    background-color: #F3EAE1;
+    /* Fondo oscuro alternado */
+    padding: 100px 40px;
+}
+
+.sedes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 columnas iguales */
+    gap: 30px;
+    max-width: 1100px;
+    /* Un poco más angosto para que las 3 tarjetas no queden súper estiradas */
+    margin: 0 auto;
+}
+
+.sede-card {
+    background-color: #ffffff;
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto hover suave para las tarjetas */
+.sede-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.sede-card h3 {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    color: #2D241F;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.sede-info {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sede-info li {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    /* Espacio entre el icono y el texto */
+    margin-bottom: 20px;
+    color: #665b55;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.sede-info li:last-child {
+    margin-bottom: 0;
+    /* Quita el margen al último elemento */
+}
+
+/* Color y tamaño de los iconos dentro de la tarjeta */
+.sede-info svg {
+    color: var(--primary-brown);
+    flex-shrink: 0;
+    /* Evita que el icono se encoja si el texto es muy largo */
+    margin-top: 2px;
+    /* Alinea el icono un poquito hacia abajo para que coincida con el texto */
+}
+
+/* --- SECCIÓN DE EVENTOS --- */
+.events-section {
+    background-color: #241D18;
+    /* Un marrón muy oscuro, casi negro */
+    padding: 100px 40px;
+}
+
+/* Utilidades para texto sobre fondo oscuro */
+.text-white {
+    color: #ffffff !important;
+}
+
+.text-light {
+    color: #A89D95 !important;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.event-card {
+    background-color: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Borde sutil transparente */
+    border-radius: 12px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--highlight-gold);
+    /* El borde se pinta dorado al pasar el mouse */
+}
+
+.event-icon {
+    background-color: #3A2E26;
+    /* Círculo marrón oscuro */
+    color: var(--highlight-gold);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 25px auto;
+}
+
+.event-card h3 {
+    font-family: var(--font-serif);
+    font-size: 22px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.event-card p {
+    color: #A89D95;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* Botón de Eventos */
+.btn-event {
+    background-color: #ffffff;
+    color: #241D18;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-event:hover {
+    background-color: var(--highlight-gold);
+    color: #ffffff;
+}
+
+/* --- FOOTER (PIE DE PÁGINA) --- */
+.footer {
+    background-color: #241D18;
+    padding: 60px 40px 40px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Línea divisoria muy suave */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    /* La primera columna (info) es más grande */
+    gap: 40px;
+}
+
+.footer-logo {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.footer-col p {
+    color: #A89D95;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    padding-right: 20px;
+}
+
+.footer-col h4 {
+    color: #ffffff;
+    font-family: var(--font-serif);
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 12px;
+}
+
+.footer-col ul a,
+.contact-info li {
+    color: #A89D95;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.footer-col ul a:hover {
+    color: var(--highlight-gold);
+}
+
+/* --- ICONOS SOCIALES EN CÍRCULOS --- */
+.social-icons a {
+    display: inline-flex;
+    /* Esto permite centrar el ícono perfectamente dentro del círculo */
+    justify-content: center;
+    align-items: center;
+    width: 42px;
+    /* Ancho del círculo */
+    height: 42px;
+    /* Alto del círculo */
+    background-color: #3A2E26;
+    /* Fondo gris/marrón oscuro */
+    color: #A89D95;
+    /* Color del ícono */
+    margin-right: 15px;
+    border-radius: 50%;
+    /* Lo hace redondo */
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--highlight-gold);
+    /* Cambia a dorado al pasar el ratón */
+    color: #ffffff;
+    /* El ícono se vuelve blanco */
+    transform: translateY(-3px);
+    /* Se levanta un poquito */
+}
+
+/* --- BARRA INFERIOR DE COPYRIGHT --- */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Línea divisoria muy sutil */
+    margin-top: 50px;
+    padding-top: 25px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #A89D95;
+    font-size: 13px;
+    margin: 0;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO (MÓVILES Y TABLETS) - CLIENTE
+   ========================================= */
+@media (max-width: 992px) {
+    /* Aumentamos el tamaño para que se active mucho antes */
+
+    /* --- HEADER MÓVIL --- */
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: #2D241F;
+        cursor: pointer;
+    }
+
+    /* La pantalla del menú móvil adaptada a tu segunda foto */
+    .nav-wrapper {
+        position: absolute;
+        /* Cambiamos fixed a absolute para que caiga desde arriba */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        /* Ocupa solo lo necesario, dejando ver el fondo abajo */
+        background-color: var(--bg-cream);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px 25px 30px 25px;
+        z-index: 2000;
+        display: none;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+        /* Sombra oscura que hace contraste */
+    }
+
+    .nav-wrapper.active {
+        display: flex;
+    }
+
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #E5D8CD;
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+    }
+
+    .logo-text-mobile {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        color: var(--primary-brown);
+        font-weight: 700;
+    }
+
+    .close-menu-btn {
+        background: none;
+        border: 1px solid #2D241F;
+        border-radius: 6px;
+        padding: 4px;
+        color: #2D241F;
+        display: flex;
+        cursor: pointer;
+    }
+
+    /* Enlaces */
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
+    .nav-links a {
+        font-size: 15px;
+        color: #2D241F;
+        font-weight: 500;
+    }
+
+    /* Línea separadora y subtítulo de Productos */
+    .mobile-divider {
+        width: 100%;
+        border: none;
+        border-top: 1px solid #E5D8CD;
+        margin: 5px 0;
+    }
+
+    .mobile-category-title {
+        font-size: 13px;
+        color: #8c827b;
+        margin-bottom: -5px;
+    }
+
+    .btn-contact {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+
+    /* --- RESTO DE LA PÁGINA (Ajuste 1 columna) --- */
+    .services-section,
+    .products-section,
+    .about-section,
+    .sedes-section,
+    .events-section {
+        padding: 60px 20px;
+    }
+
+    .section-title,
+    .about-title {
+        font-size: 32px;
+    }
+
+    .services-grid,
+    .products-grid,
+    .sedes-grid,
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Ocultar elementos exclusivos de móvil en PC */
+.mobile-menu-item {
+    display: none;
+}
+
+/* =========================================
+   DISEÑO RESPONSIVO (MÓVILES Y TABLETS) - CLIENTE
+   ========================================= */
+@media (max-width: 992px) {
+
+    /* --- HEADER MÓVIL --- */
+    .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: #2D241F;
+        cursor: pointer;
+    }
+
+    /* La pantalla del menú móvil */
+    .nav-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        background-color: var(--bg-cream);
+        flex-direction: column;
+        align-items: flex-start;
+        /* ESTO FUERZA EL MENÚ A LA IZQUIERDA */
+        padding: 20px 25px 30px 25px;
+        z-index: 2000;
+        display: none;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-wrapper.active {
+        display: flex;
+    }
+
+    /* Cabecera del menú (Logo y X) */
+    .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        /* Ocupa todo el ancho */
+        border-bottom: 1px solid #E5D8CD;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo-text-mobile {
+        font-family: var(--font-serif);
+        font-size: 24px;
+        color: var(--primary-brown);
+        font-weight: 700;
+    }
+
+    .close-menu-btn {
+        background: none;
+        border: 1px solid #E5D8CD;
+        border-radius: 6px;
+        padding: 4px;
+        color: #2D241F;
+        display: flex;
+        cursor: pointer;
+    }
+
+    /* Enlaces forzados a la izquierda */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* Alinea textos a la izquierda */
+        width: 100%;
+        margin: 0;
+        /* Quita márgenes heredados del PC */
+        padding: 0;
+        gap: 18px;
+        /* Espaciado idéntico a tu foto */
+    }
+
+    .nav-links a {
+        font-size: 15px;
+        color: #2D241F;
+        font-weight: 500;
+        text-decoration: none;
+        width: 100%;
+    }
+
+    /* Línea separadora y subtítulo de Productos */
+    .mobile-divider {
+        width: 100%;
+        border: none;
+        border-top: 1px solid #E5D8CD;
+        margin: 0;
+    }
+
+    .mobile-category-title {
+        font-size: 13px;
+        color: #8c827b;
+        margin-top: 5px;
+    }
+
+    /* Botón final */
+    .btn-contact {
+        width: 100%;
+        text-align: center;
+        padding: 14px;
+        margin-top: 20px;
+        box-sizing: border-box;
+    }
+
+    /* --- RESTO DE LA PÁGINA (Ajuste 1 columna) --- */
+    .services-section,
+    .products-section,
+    .about-section,
+    .sedes-section,
+    .events-section {
+        padding: 60px 20px;
+    }
+
+    .section-title,
+    .about-title {
+        font-size: 32px;
+    }
+
+    .services-grid,
+    .products-grid,
+    .sedes-grid,
+    .events-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    /* Ocultar menú desplegable de PC en celular */
+    .desktop-menu-item {
+        display: none;
+    }
+
+    /* Mostrar estructura de Productos para celular */
+    .mobile-menu-item {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 18px;
+    }
+
+    .mobile-menu-item a {
+        font-size: 15px;
+        color: #2D241F;
+        font-weight: 500;
+        text-decoration: none;
+        width: 100%;
+    }
 }
