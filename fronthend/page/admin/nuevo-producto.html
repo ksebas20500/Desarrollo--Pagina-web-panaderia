@@ -82,45 +82,61 @@
             <div class="dashboard-panel form-panel">
                 <h3 class="form-section-title">Nuevo Producto</h3>
 
-                <form action="#" class="product-form">
+                <form id="form-producto" class="product-form">
 
                     <div class="form-group">
                         <label>Nombre del producto</label>
-                        <input type="text" placeholder="Pan artesanal">
+                        <input type="text" id="nombre" placeholder="Pan artesanal" required>
                     </div>
 
                     <div class="form-group">
                         <label>Descripción</label>
-                        <textarea rows="4" placeholder="Describe el producto..."></textarea>
+                        <textarea id="descripcion" rows="4" placeholder="Describe el producto..."></textarea>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Precio</label>
-                            <input type="number" placeholder="10.00">
+                            <input type="number" id="precio" placeholder="10.00" step="0.01" required>
                         </div>
                         <div class="form-group">
                             <label>Categoría</label>
-                            <select>
+                            <select id="categoria" required>
                                 <option value="" disabled selected>Seleccionar categoría</option>
-                                <option value="panes">Panes</option>
-                                <option value="tortas">Tortas</option>
-                                <option value="postres">Postres</option>
+                                <option value="Panes">Panes</option>
+                                <option value="Tortas">Tortas</option>
+                                <option value="Postres">Postres</option>
+                                <option value="Bollería">Bollería</option>
                             </select>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label>Imagen del producto</label>
-                        <div class="image-upload-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                <polyline points="21 15 16 10 5 21"></polyline>
-                            </svg>
-                            <p>Subir imagen</p>
+                        <div class="image-upload-wrapper">
+                            <input type="file" id="imagen" accept="image/*" style="display: none;">
+
+                            <!-- Componente punteado -->
+                            <div class="image-upload-box" id="upload-box" onclick="document.getElementById('imagen').click()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                    fill="none" stroke="#9ca3af" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <polyline points="21 15 16 10 5 21"></polyline>
+                                </svg>
+                                <p id="texto-imagen" style="color: #6b7280; font-size: 14px; margin-top: 8px;">Haz clic para subir imagen</p>
+                            </div>
+
+                            <!-- Contenedor de Vista Previa -->
+                            <div id="preview-container" class="image-preview-container" style="display:none;">
+                                <img id="preview-imagen" src="" alt="Vista previa">
+                                <button type="button" id="btn-remove-imagen" class="btn-remove-imagen" title="Quitar foto">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -136,8 +152,11 @@
                     </div>
 
                     <div class="form-actions">
-                        <button type="button" class="btn-muted">Crear producto</button>
-                        <button type="button" class="btn-outline">Cancelar</button>
+                        <button type="submit" class="btn-primary"
+                            style="padding: 10px 20px; border:none; border-radius: 4px; cursor:pointer;">Crear
+                            producto</button>
+                        <a href="productos.html" class="btn-outline"
+                            style="text-decoration: none; padding: 10px 20px; display:inline-block;">Cancelar</a>
                     </div>
 
                 </form>
@@ -146,6 +165,7 @@
         </main>
     </div>
 
+    <script src="../../js/agregar_producto.js"></script>
 </body>
 
 </html>

@@ -67,7 +67,6 @@
         </aside>
 
         <main class="main-content">
-
             <header class="top-header">
                 <h1 class="page-title">Productos</h1>
                 <a href="nuevo-producto.html" class="btn-primary" style="text-decoration: none;">
@@ -80,37 +79,57 @@
                 </a>
             </header>
 
+            <!-- === PANEL DE LA TABLA === -->
+            <!-- En este contenedor se insertarán los productos que se traen de la base de datos a través de JS -->
             <div class="dashboard-panel">
                 <h3 class="panel-title">Lista de Productos</h3>
-                <div id="empty-products-msg" class="empty-state">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                        stroke="#A89D95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-                        </path>
-                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                    </svg>
-                    <p>No hay productos todavía</p>
 
-                    <a href="nuevo-producto.html" class="btn-primary" style="text-decoration: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                        Agregar primer producto
-                    </a>
+                <div id="empty-products-msg" class="empty-state">
+                    <p>No hay productos todavía</p>
+                    <a href="nuevo-producto.html" class="btn-primary" style="text-decoration: none;">Agregar primer
+                        producto</a>
                 </div>
 
                 <div id="products-table-container" style="display: none;">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Estado</th>
+                                <th class="right-align">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpo-tabla">
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
-
         </main>
     </div>
 
+    <!-- MODAL PARA VER DETALLE DEL PRODUCTO -->
+    <div id="modal-ver" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="cerrarModal()" title="Cerrar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="modal-img-container">
+                <img id="modal-img" src="" alt="Sin imagen">
+            </div>
+            <h2 id="modal-title" class="modal-title">Cargando...</h2>
+            <p id="modal-desc" class="modal-desc">...</p>
+            <div class="modal-flex">
+                <span id="modal-category" class="pill-category">...</span>
+                <span id="modal-price" class="modal-price">$0.00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARGAR SCRIPT -->
+    <!-- Este script es el responsable de consultar al backend en Java y generar las filas <tr> de la tabla -->
+    <script src="../../js/cargar_productos.js"></script>
 </body>
 
 </html>

@@ -285,10 +285,14 @@ body {
 
 .stat-card {
     background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 24px;
+    border-radius: 8px;
     border: 1px solid #E5D8CD;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    box-shadow: none;
+    /* Aspecto más limpio y plano */
+    display: flex;
+    flex-direction: column;
+    min-height: 120px;
 }
 
 .stat-header {
@@ -304,20 +308,9 @@ body {
     font-weight: 500;
 }
 
-.stat-icon.brown {
-    color: var(--primary-brown);
-}
-
-.stat-icon.orange {
-    color: #d97706;
-}
-
-.stat-icon.pink {
-    color: #db2777;
-}
-
-.stat-icon.red {
-    color: #dc2626;
+.stat-icon {
+    /* Mismo color para todos los íconos (Cobre/Marrón fino) */
+    color: #B25A24;
 }
 
 .stat-value {
@@ -449,25 +442,74 @@ body {
     gap: 20px;
 }
 
-/* Área de Subir Imagen */
+/* Área de Subir Imagen Moderanizada */
+.image-upload-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .image-upload-box {
-    border: 2px dashed #E5D8CD;
-    background-color: #FAF7F5;
+    border: 2px dashed #d1d5db;
+    background-color: #f9fafb;
     border-radius: 8px;
-    height: 140px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    color: #8c827b;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 }
 
 .image-upload-box:hover {
-    border-color: var(--primary-brown);
-    background-color: #F3EAE1;
+    border-color: #9ca3af;
+    background-color: #f3f4f6;
+}
+
+.image-preview-container {
+    position: relative;
+    width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.image-preview-container img {
+    width: 100%;
+    height: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-radius: 8px;
+}
+
+/* Botón flotante para ELIMINAR imagen */
+.btn-remove-imagen {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #ef4444;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    z-index: 10;
+    padding: 0;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-remove-imagen:hover {
+    background-color: #ef4444;
+    color: white;
+    transform: scale(1.05);
 }
 
 /* Contenedor del Interruptor (Toggle) */
@@ -569,6 +611,105 @@ input:checked+.slider:before {
     background-color: var(--primary-brown);
 }
 
+/* Modal Flotante para "VER" Producto */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #8c827b;
+}
+
+.modal-close:hover {
+    color: var(--primary-brown);
+}
+
+.modal-img-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.modal-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-title {
+    font-size: 20px;
+    color: #2D241F;
+    margin-bottom: 8px;
+    font-family: var(--font-serif);
+}
+
+.modal-desc {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.modal-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-top: 1px solid #E5D8CD;
+    padding-top: 20px;
+}
+
+.modal-price {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-brown);
+}
+
 /* =========================================
    DISEÑO RESPONSIVO (MÓVILES Y TABLETS) - ADMIN
    ========================================= */
@@ -646,4 +787,163 @@ input:checked+.slider:before {
     .btn-outline {
         width: 100%;
     }
+}
+
+/* =========================================
+   ESTILOS DE TABLAS
+   ========================================= */
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.admin-table th {
+    border-bottom: 2px solid #f3f4f6;
+    color: #6b7280;
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 16px 24px;
+    text-align: left;
+}
+
+.admin-table th.right-align {
+    text-align: right;
+}
+
+.admin-table td {
+    padding: 16px 24px;
+}
+
+.table-row {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+    background-color: #f9fafb;
+}
+
+/* =========================================
+   PÍLDORAS (PILLS) Y BADGES
+   ========================================= */
+
+.pill-category {
+    background-color: #FDF4EB;
+    /* Claro naranja/marrón */
+    color: #B25A24;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.pill-status {
+    background-color: #E8F5E9;
+    /* Verde claro */
+    color: #2E7D32;
+    /* Verde oscuro */
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.table-product-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.table-product-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table-product-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: #9ca3af;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.table-product-title {
+    font-weight: 600;
+    color: #2D241F;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.table-product-subtitle {
+    font-size: 13px;
+    color: #8c827b;
+}
+
+.table-price {
+    font-weight: 600;
+    color: #2D241F;
+}
+
+/* =========================================
+   BOTONES DE ACCIÓN (TABLA)
+   ========================================= */
+
+.acciones-container {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    color: #6b7280;
+}
+
+.btn-action.view:hover {
+    color: var(--primary-brown);
+    background-color: #FAF7F5;
+}
+
+.btn-action.edit {
+    background-color: #D4A373;
+    /* Fondo marrón claro */
+    color: white;
+}
+
+.btn-action.edit:hover {
+    background-color: var(--primary-brown);
+}
+
+.btn-action.delete {
+    color: #ef4444;
+    /* Rojo */
+}
+
+.btn-action.delete:hover {
+    background-color: #FEF2F2;
 }
