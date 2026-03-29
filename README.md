@@ -33,7 +33,7 @@ El proyecto está diseñado sobre una sólida y moderna arquitectura Cliente-Ser
 ---
 
 ## 📂 Estructura de Carpetas
->>>>>>> 6a60299f7d66ed0ef1c8fdb96a68c4b97c0fa4f2
+
 ```text
 pagina_web_panaderia/
 │
@@ -58,62 +58,29 @@ pagina_web_panaderia/
             ├── productos.html # Vista tipo tabla control de stock
             └── nuevo-producto.html
 ```
-<<<<<<< HEAD
+
 ---
-## 🖼️ Vistazo al Proyecto
-Para embellecer este documento oficial en Github, inserta en los siguientes corchetes las capturas de imagen reales del proyecto tomadas de tu computadora (recuerda que puedes simplemente 'Arrastrarlas' al editor de Github online en estos bloques):
-> **1. Página Principal (Index)**  
-> *(Arrastra y suelta aquí una foto de la zona principal del Index)*
-> **2. Catálogo de Productos y Modal Selector de Sedes para WhatsApp**  
-> *(Arrastra y suelta aquí una foto de la galería de tortas con la ventana de WhatsApp abierta)*
-> **3. Interfaz de Administración y Multi-Sede**  
-> *(Arrastra y suelta aquí una foto tuya rellenando las descripciones y eligiendo Checkboxes al crear la sede)*
----
-## 📚 Documentación y Uso Local
-Para poner este sistema en marcha en otra computadora y probar sus características, sigue este instructivo de instalación rápida:
-### 1. Levantar el Backend
-Para desplegar el cerebro de la aplicación es requisito tener instalado **Java JDK** y **Maven**.
-=======
----
-## 🖼️ Vistazo al Proyecto
-Para embellecer este documento oficial en Github, inserta en los siguientes corchetes las capturas de imagen reales del proyecto tomadas de tu computadora (recuerda que puedes simplemente 'Arrastrarlas' al editor de Github online en estos bloques):
-> **1. Página Principal (Index)**  
-> *(Arrastra aquí una foto de la zona principal del Index)*
-> **2. Catálogo de Productos y Modal Selector de Sedes para WhatsApp**  
-> *(Arrastra aquí una foto de la galería de tortas con la ventana de WhatsApp abierta)*
-> **3. Interfaz de Administración y Multi-Sede**  
-> *(Arrastra aquí una foto tuya rellenando las descripciones y eligiendo Checkboxes al crear la sede)*
----
+
+
 ## 📚 Documentación y Uso Local
 Para poner este sistema en marcha en otra computadora y probar sus características, sigue este instructivo de instalación rápida:
 ### 1. Levantar el Backend
 Para desplegar el cerebro de la aplicación es requisito tener instalado **Java** JDK y **Maven**.
->>>>>>> 6a60299f7d66ed0ef1c8fdb96a68c4b97c0fa4f2
+
 Abre tu consola de comandos en la carpeta raíz del proyecto y dirígete al backend:
 ```bash
 cd backend
 mvn spring-boot:run
 ```
 Tras esto, el servicio rest permanecerá escuchando en el puerto `http://localhost:8080`. Comprobarás cómo JPA detecta y auto-conecta automáticamente con la base local proporcionada `web_deria.db`.
-<<<<<<< HEAD
+
 ### 2. Levantar el Frontend
 Por la estrictez moderna de políticas de CORS del bloque navegador al consumir las fotos Base64, despliega la capa Frontend simulando tu servidor de desarrollo temporal. 
 * Puedes usar **Live Server** (extensión sugerida de Microsoft VS Code).
 * Da click derecho al archivo `fronthend/page/index.html` → "Open with Live Server". ¡Y a hornear se ha dicho!
 ---
-## 👥 Integrantes del Equipo Creador
-Este proyecto universitario/formativo fue ideado, diseñado y llevado desde lo conceptual hasta el despliegue funcional del código por:
-* **Kevin Sebastian Medina Nava**
-* **Justin Javier Paez Torres**
-* **Carlos Sebastian Antolinez Colorado**
----
 _Desarrollado con ☕ y 🤎 para ofrecer la mejor experiencia digital en panadería artesanal._
 =======
-### 2. Levantar el Frontend
-Por la estrictez moderna de políticas de CORS del bloque navegador al consumir las fotos Base64, despliega la capa Frontend simulando tu servidor de desarrollo temporal. 
-- Puedes usar **Live Server** (extensión sugerida de Microsoft VS Code).
-- Click derecho al archivo `/fronthend/page/index.html` → "Open with Live Server". ¡Y a hornear se ha dicho!
----
 ## 👥 Integrantes del Equipo Creador
 Este proyecto universitario y formativo fue ideado, diseñado y llevado desde lo conceptual hasta el despliegue funcional del código por:
 * **Kevin Sebastian Medina Nava**
@@ -123,4 +90,3 @@ Este proyecto universitario y formativo fue ideado, diseñado y llevado desde lo
 <div align="center">
   <i>Desarrollado con ☕ y 🤎 para ofrecer la mejor experiencia digital en panadería artesanal.</i>
 </div>
->>>>>>> 6a60299f7d66ed0ef1c8fdb96a68c4b97c0fa4f2
