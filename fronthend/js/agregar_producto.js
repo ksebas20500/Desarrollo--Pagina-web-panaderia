@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('precio').value = data.precio;
                 document.getElementById('categoria').value = data.categoria;
 
+                if (data.sedeAniversario !== undefined) document.getElementById('sede-aniversario').checked = data.sedeAniversario;
+                if (data.sedeGarcia !== undefined) document.getElementById('sede-garcia').checked = data.sedeGarcia;
+                if (data.sedeMagdalena !== undefined) document.getElementById('sede-magdalena').checked = data.sedeMagdalena;
+
                 if (data.imagen) {
                     imagenBase64 = data.imagen; // Guardar la imagen original por si no sube otra
                     document.getElementById('preview-imagen').src = imagenBase64;
@@ -85,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 descripcion: document.getElementById('descripcion').value,
                 precio: parseFloat(document.getElementById('precio').value),
                 categoria: document.getElementById('categoria').value,
+                sedeAniversario: document.getElementById('sede-aniversario').checked,
+                sedeGarcia: document.getElementById('sede-garcia').checked,
+                sedeMagdalena: document.getElementById('sede-magdalena').checked,
                 imagen: imagenBase64
             };
 

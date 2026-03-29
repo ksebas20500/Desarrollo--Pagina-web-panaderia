@@ -24,6 +24,11 @@ public class Producto {
     // Campo para saber si el producto está en venta (true) o inactivo (false)
     private Boolean activo = true;
 
+    // Disponibilidad en sedes individuales (por defecto todas activas)
+    private Boolean sedeAniversario = true;
+    private Boolean sedeGarcia = true;
+    private Boolean sedeMagdalena = true;
+
     // Constructores vacíos obligatorios de Hibernate
 
     public Producto() {
@@ -77,12 +82,35 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    // Getters y Setters para el nuevo campo "activo"
     public Boolean getActivo() {
         return activo;
     }
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public Boolean getSedeAniversario() {
+        return sedeAniversario;
+    }
+
+    public void setSedeAniversario(Boolean sedeAniversario) {
+        this.sedeAniversario = sedeAniversario;
+    }
+
+    public Boolean getSedeGarcia() {
+        return sedeGarcia;
+    }
+
+    public void setSedeGarcia(Boolean sedeGarcia) {
+        this.sedeGarcia = sedeGarcia;
+    }
+
+    public Boolean getSedeMagdalena() {
+        return sedeMagdalena;
+    }
+
+    public void setSedeMagdalena(Boolean sedeMagdalena) {
+        this.sedeMagdalena = sedeMagdalena;
     }
 }

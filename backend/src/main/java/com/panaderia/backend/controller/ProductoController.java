@@ -21,6 +21,12 @@ public class ProductoController {
         return productoRepository.findAll();
     }
 
+    // MÉTODO NUEVO: Trae productos filtrados por categoría y que estén activos
+    @GetMapping("/categoria/{categoria}")
+    public List<Producto> getProductosPorCategoria(@PathVariable String categoria) {
+        return productoRepository.findByCategoriaIgnoreCaseAndActivoTrue(categoria);
+    }
+
     // MÉTODO 1.5: Trae un solo producto por su ID (útil para la página de editar)
     @GetMapping("/{id}")
     public Producto getProductoPorId(@PathVariable Long id) {
@@ -49,6 +55,12 @@ public class ProductoController {
             producto.setDescripcion(productoActualizado.getDescripcion());
             producto.setPrecio(productoActualizado.getPrecio());
             producto.setCategoria(productoActualizado.getCategoria());
+            
+            // Actualización de Sucursales (Se hace validación en caso de que lleguen nulos)
+            producto.setSedeAniversario(productoActualizado.getSedeAniversario() != null ? productoActualizado.getSedeAniversario() : true);
+            producto.setSedeGarcia(productoActualizado.getSedeGarcia() != null ? productoActualizado.getSedeGarcia() : true);
+            producto.setSedeMagdalena(productoActualizado.getSedeMagdalena() != null ? productoActualizado.getSedeMagdalena() : true);
+            
             if (productoActualizado.getImagen() != null) {
                 producto.setImagen(productoActualizado.getImagen());
             }
