@@ -1,7 +1,8 @@
-const db = firebase.firestore();
+let db;
 
 async function cargarDatosDashboard() {
     try {
+        if (!db) db = firebase.firestore();
         const querySnapshot = await db.collection('productos').orderBy('fechaCreacion', 'desc').get();
         const productos = [];
         querySnapshot.forEach(doc => {

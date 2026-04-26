@@ -21,10 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let cacheProductos = {};
-
-const db = firebase.firestore();
+let db;
 
 async function cargarProductosPorCategoria(categoria) {
+    if (!db) db = firebase.firestore();
     const gridContainer = document.getElementById('products-grid-container');
     
     try {

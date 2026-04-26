@@ -1,6 +1,7 @@
-const db = firebase.firestore();
+let db;
 
 document.addEventListener('DOMContentLoaded', async () => {
+    db = firebase.firestore();
     const formulario = document.getElementById('form-producto');
     let imagenBase64 = ""; 
 
