@@ -1,15 +1,6 @@
-const LOCAL_STORAGE_KEY = 'panaderia_productos';
+const db = firebase.firestore();
 
-function obtenerProductosLS() {
-    const productos = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return productos ? JSON.parse(productos) : [];
-}
-
-function guardarProductosLS(productos) {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(productos));
-}
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const formulario = document.getElementById('form-producto');
     let imagenBase64 = ""; 
 
@@ -22,30 +13,32 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tituloPagina) tituloPagina.textContent = "Editar Producto";
         if (botonGuardar) botonGuardar.textContent = "Guardar Cambios";
 
-        const productos = obtenerProductosLS();
-        const data = productos.find(p => p.id == productoId);
+        try {
+            const docRef = await db.collection('productos').doc(productoId).get();
+            if (docRef.exists) {
+                const data = docRef.data();
+                document.getElementById('nombre').value = data.nombre;
+                if (data.descripcion) {
+                    document.getElementById('descripcion').value = data.descripcion;
+                }
+                document.getElementById('precio').value = data.precio;
+                document.getElementById('categoria').value = data.categoria;
 
-        if (data) {
-            document.getElementById('nombre').value = data.nombre;
-            if (data.descripcion) {
-                document.getElementById('descripcion').value = data.descripcion;
+                if (data.sedeAniversario !== undefined) document.getElementById('sede-aniversario').checked = data.sedeAniversario;
+                if (data.sedeGarcia !== undefined) document.getElementById('sede-garcia').checked = data.sedeGarcia;
+                if (data.sedeMagdalena !== undefined) document.getElementById('sede-magdalena').checked = data.sedeMagdalena;
+
+                if (data.imagen) {
+                    imagenBase64 = data.imagen; 
+                    document.getElementById('preview-imagen').src = imagenBase64;
+                    document.getElementById('preview-container').style.display = 'block';
+                    document.getElementById('upload-box').style.display = 'none';
+                }
             }
-            document.getElementById('precio').value = data.precio;
-            document.getElementById('categoria').value = data.categoria;
-
-            if (data.sedeAniversario !== undefined) document.getElementById('sede-aniversario').checked = data.sedeAniversario;
-            if (data.sedeGarcia !== undefined) document.getElementById('sede-garcia').checked = data.sedeGarcia;
-            if (data.sedeMagdalena !== undefined) document.getElementById('sede-magdalena').checked = data.sedeMagdalena;
-
-            if (data.imagen) {
-                imagenBase64 = data.imagen; 
-                document.getElementById('preview-imagen').src = imagenBase64;
-                document.getElementById('preview-container').style.display = 'block';
-                document.getElementById('upload-box').style.display = 'none';
-            }
+        } catch (error) {
+            console.error("Error al obtener el producto:", error);
         }
     }
-
 
     const inputImagen = document.getElementById('imagen');
     if (inputImagen) {
@@ -95,24 +88,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 activo: true
             };
 
-            let productos = obtenerProductosLS();
-
-            if (productoId) {
-                productoPayload.id = parseInt(productoId);
-                const index = productos.findIndex(p => p.id == productoId);
-                if (index !== -1) {
-                    productoPayload.activo = productos[index].activo;
-                    productos[index] = productoPayload;
+            try {
+                if (productoId) {
+                    // Update if editing
+                    // We don't overwrite activo if not needed, but we don't have it locally.
+                    // Better to just update specific fields.
+                    await db.collection('productos').doc(productoId).update(productoPayload);
+                    alert('¡Producto actualizado exitosamente!');
+                } else {
+                    // Create new
+                    productoPayload.fechaCreacion = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection('productos').add(productoPayload);
+                    alert('¡Producto creado exitosamente!');
                 }
-            } else {
-                productoPayload.id = Date.now();
-                productos.push(productoPayload);
+                window.location.href = 'productos.html';
+            } catch (error) {
+                console.error("Error al guardar en Firestore:", error);
+                alert("Error al guardar el producto. Asegúrate de tener permisos.");
             }
-
-            guardarProductosLS(productos);
-
-            alert(`¡Producto ${productoId ? 'actualizado' : 'creado'} exitosamente!`);
-            window.location.href = 'productos.html';
         });
     }
 });

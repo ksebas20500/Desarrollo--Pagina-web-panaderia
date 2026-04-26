@@ -1,17 +1,12 @@
-const LOCAL_STORAGE_KEY = 'panaderia_productos';
-
-function obtenerProductosLS() {
-    const productos = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return productos ? JSON.parse(productos) : [];
-}
-
-function guardarProductosLS(productos) {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(productos));
-}
+const db = firebase.firestore();
 
 async function cargarProductos() {
     try {
-        const productos = obtenerProductosLS();
+        const querySnapshot = await db.collection('productos').orderBy('fechaCreacion', 'desc').get();
+        const productos = [];
+        querySnapshot.forEach(doc => {
+            productos.push({ id: doc.id, ...doc.data() });
+        });
 
         const tablaBody = document.getElementById('cuerpo-tabla');
         const contenedorTabla = document.getElementById('products-table-container');
@@ -30,11 +25,11 @@ async function cargarProductos() {
                 const isActivo = p.activo !== false;
                 
                 const pillHtml = isActivo 
-                    ? `<span class="pill-status" style="cursor:pointer;" onclick="cambiarEstado(${p.id}, false)" title="Haz clic para Desactivar">
+                    ? `<span class="pill-status" style="cursor:pointer;" onclick="cambiarEstado('${p.id}', false)" title="Haz clic para Desactivar">
                            <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" stroke="none"><circle cx="12" cy="12" r="10"></circle></svg>
                            Activo
                        </span>`
-                    : `<span class="pill-status" style="background-color:#fee2e2; color:#b91c1c; cursor:pointer;" onclick="cambiarEstado(${p.id}, true)" title="Haz clic para Activar">
+                    : `<span class="pill-status" style="background-color:#fee2e2; color:#b91c1c; cursor:pointer;" onclick="cambiarEstado('${p.id}', true)" title="Haz clic para Activar">
                            <svg width="8" height="8" viewBox="0 0 24 24" fill="#b91c1c" stroke="none"><circle cx="12" cy="12" r="10"></circle></svg>
                            Inactivo
                        </span>`;
@@ -61,13 +56,13 @@ async function cargarProductos() {
                             </td>
                             <td style="text-align: right;">
                                 <div class="acciones-container">
-                                    <button onclick="verProducto(${p.id})" class="btn-action view" title="Ver">
+                                    <button onclick="verProducto('${p.id}')" class="btn-action view" title="Ver">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                     </button>
-                                    <button onclick="editarProducto(${p.id})" class="btn-action edit" title="Editar">
+                                    <button onclick="editarProducto('${p.id}')" class="btn-action edit" title="Editar">
                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                                     </button>
-                                    <button onclick="eliminarProducto(${p.id})" class="btn-action delete" title="Eliminar">
+                                    <button onclick="eliminarProducto('${p.id}')" class="btn-action delete" title="Eliminar">
                                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                     </button>
                                 </div>
@@ -80,7 +75,7 @@ async function cargarProductos() {
             contenedorTabla.style.display = 'none';
         }
     } catch (error) {
-        console.error("Error al cargar productos de localstorage:", error);
+        console.error("Error al cargar productos de Firestore:", error);
     }
 }
 
@@ -92,42 +87,50 @@ async function eliminarProducto(id) {
     const confirmacion = confirm("¿Estás seguro que deseas eliminar este producto permanentemente?");
     if (!confirmacion) return;
 
-    let productos = obtenerProductosLS();
-    productos = productos.filter(p => p.id != id);
-    guardarProductosLS(productos);
-    alert("Producto eliminado correctamente.");
-    cargarProductos(); 
+    try {
+        await db.collection('productos').doc(id).delete();
+        alert("Producto eliminado correctamente.");
+        cargarProductos(); 
+    } catch (error) {
+        console.error("Error al eliminar producto:", error);
+        alert("Error al eliminar el producto.");
+    }
 }
 
 async function cambiarEstado(id, nuevoEstado) {
-    let productos = obtenerProductosLS();
-    const index = productos.findIndex(p => p.id == id);
-    if (index !== -1) {
-        productos[index].activo = nuevoEstado;
-        guardarProductosLS(productos);
+    try {
+        await db.collection('productos').doc(id).update({ activo: nuevoEstado });
         cargarProductos();
+    } catch (error) {
+        console.error("Error al cambiar estado:", error);
+        alert("Error al actualizar el estado del producto.");
     }
 }
 
 async function verProducto(id) {
-    const productos = obtenerProductosLS();
-    const data = productos.find(p => p.id == id);
-    if(data) {
-        document.getElementById('modal-title').innerText = data.nombre;
-        document.getElementById('modal-desc').innerText = data.descripcion ? data.descripcion : "Este producto no tiene una descripción detallada provista.";
-        document.getElementById('modal-category').innerText = data.categoria;
-        document.getElementById('modal-price').innerText = `$${data.precio.toFixed(2)}`;
-        
-        const imgEl = document.getElementById('modal-img');
-        if(data.imagen){
-            imgEl.src = data.imagen;
-            imgEl.style.display = 'block';
-        } else {
-            imgEl.style.display = 'none';
-        }
+    try {
+        const docRef = await db.collection('productos').doc(id).get();
+        if (docRef.exists) {
+            const data = docRef.data();
+            document.getElementById('modal-title').innerText = data.nombre;
+            document.getElementById('modal-desc').innerText = data.descripcion ? data.descripcion : "Este producto no tiene una descripción detallada provista.";
+            document.getElementById('modal-category').innerText = data.categoria;
+            document.getElementById('modal-price').innerText = `$${data.precio.toFixed(2)}`;
+            
+            const imgEl = document.getElementById('modal-img');
+            if(data.imagen){
+                imgEl.src = data.imagen;
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.style.display = 'none';
+            }
 
-        document.getElementById('modal-ver').classList.add('active');
-    } else {
+            document.getElementById('modal-ver').classList.add('active');
+        } else {
+            alert("El producto no existe.");
+        }
+    } catch (error) {
+        console.error("Error al ver producto:", error);
         alert("Error al cargar los detalles del producto.");
     }
 }

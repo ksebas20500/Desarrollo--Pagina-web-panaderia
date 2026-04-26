@@ -1,19 +1,18 @@
-const LOCAL_STORAGE_KEY = 'panaderia_productos';
-
-function obtenerProductosLS() {
-    const productos = localStorage.getItem(LOCAL_STORAGE_KEY);
-    return productos ? JSON.parse(productos) : [];
-}
+const db = firebase.firestore();
 
 async function cargarDatosDashboard() {
     try {
-        const productos = obtenerProductosLS();
+        const querySnapshot = await db.collection('productos').orderBy('fechaCreacion', 'desc').get();
+        const productos = [];
+        querySnapshot.forEach(doc => {
+            productos.push({ id: doc.id, ...doc.data() });
+        });
 
         // 1. Contar estadísticas
         const totalProductos = productos.length;
-        const panesCount = productos.filter(p => p.categoria.toLowerCase() === 'panes').length;
-        const tortasCount = productos.filter(p => p.categoria.toLowerCase() === 'tortas' || p.categoria.toLowerCase() === 'pasteles').length;
-        const postresCount = productos.filter(p => p.categoria.toLowerCase() === 'postres').length;
+        const panesCount = productos.filter(p => p.categoria && p.categoria.toLowerCase() === 'panes').length;
+        const tortasCount = productos.filter(p => p.categoria && (p.categoria.toLowerCase() === 'tortas' || p.categoria.toLowerCase() === 'pasteles')).length;
+        const postresCount = productos.filter(p => p.categoria && p.categoria.toLowerCase() === 'postres').length;
 
         // 2. Actualizar el DOM
         document.getElementById('stat-total-productos').textContent = totalProductos;
@@ -31,27 +30,27 @@ async function cargarDatosDashboard() {
             recentTableContainer.style.display = 'block';
             tablaBody.innerHTML = '';
 
-            // Tomar los últimos 5 productos (asumiendo que están en orden, podemos revertirlos)
-            const productosRecientes = productos.slice().reverse().slice(0, 5);
+            // Tomar los últimos 5 productos
+            const productosRecientes = productos.slice(0, 5);
 
             productosRecientes.forEach(p => {
                 const imagenHtml = p.imagen
-                    ? `<img src="${p.imagen}" alt="${p.nombre}" class="table-product-img" style="width: 40px; height: 40px;">`
-                    : `<div class="table-product-placeholder" style="width: 40px; height: 40px;">Sin foto</div>`;
+                    ? `<img src="${p.imagen}" alt="${p.nombre}" class="table-product-img" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">`
+                    : `<div class="table-product-placeholder" style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #eee; border-radius: 4px; font-size: 10px;">Sin foto</div>`;
 
                 tablaBody.innerHTML += `
                         <tr class="table-row">
                             <td style="padding: 12px 24px;">
-                                <div class="table-product-info" style="gap: 12px;">
+                                <div class="table-product-info" style="gap: 12px; display: flex; align-items: center;">
                                     ${imagenHtml}
                                     <div>
-                                        <div class="table-product-title" style="font-size: 14px; margin-bottom: 2px;">${p.nombre}</div>
-                                        <div class="table-product-subtitle" style="font-size: 12px;">${p.categoria}</div>
+                                        <div class="table-product-title" style="font-size: 14px; margin-bottom: 2px; font-weight: 600;">${p.nombre}</div>
+                                        <div class="table-product-subtitle" style="font-size: 12px; color: #666;">${p.categoria || 'Sin categoría'}</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="table-price" style="text-align: right; padding: 12px 24px;">
-                                $${p.precio.toFixed(2)}
+                            <td class="table-price" style="text-align: right; padding: 12px 24px; font-weight: 500;">
+                                $${p.precio ? p.precio.toFixed(2) : '0.00'}
                             </td>
                         </tr>
                         `;
@@ -62,7 +61,7 @@ async function cargarDatosDashboard() {
         }
 
     } catch (error) {
-        console.error("Error conectando con localStorage:", error);
+        console.error("Error conectando con Firestore:", error);
     }
 }
 

@@ -22,13 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 let cacheProductos = {};
 
+const db = firebase.firestore();
+
 async function cargarProductosPorCategoria(categoria) {
     const gridContainer = document.getElementById('products-grid-container');
     
     try {
-        const productosLS = localStorage.getItem('panaderia_productos');
-        const todosLosProductos = productosLS ? JSON.parse(productosLS) : [];
-        const productos = todosLosProductos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase() && p.activo !== false);
+        const querySnapshot = await db.collection('productos')
+            .where('categoria', '==', categoria)
+            .get();
+            
+        const productos = [];
+        querySnapshot.forEach(doc => {
+            const data = doc.data();
+            // Filtrar inactivos (solo mostrar si activo es true o undefined por compatibilidad)
+            if (data.activo !== false) {
+                productos.push({ id: doc.id, ...data });
+            }
+        });
         
         // Limpiamos el loader
         gridContainer.innerHTML = '';
@@ -63,7 +74,7 @@ async function cargarProductosPorCategoria(categoria) {
                             </p>
                             
                             <!-- Botón para pedir por WP -->
-                            <button class="btn-outline" onclick="abrirModalPedido(${producto.id})">
+                            <button class="btn-outline" onclick="abrirModalPedido('${producto.id}')">
                                 Pedir por WhatsApp 
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                             </button>
@@ -76,7 +87,7 @@ async function cargarProductosPorCategoria(categoria) {
         });
 
     } catch (error) {
-        console.error("Error al cargar productos:", error);
+        console.error("Error al cargar productos de Firestore:", error);
         gridContainer.innerHTML = `
             <div class="empty-state">
                 <p>Ocurrió un error al cargar los productos. Por favor intenta recargar la página.</p>
