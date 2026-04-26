@@ -1,0 +1,16 @@
+# Firebase
+.firebase/
+firebase-debug.log*
+.firebaserc
+firestore-debug.log*
+ui-debug.log*
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
