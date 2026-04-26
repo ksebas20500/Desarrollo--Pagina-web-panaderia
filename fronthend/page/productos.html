@@ -219,9 +219,19 @@
         </div>
     </footer>
 
-    <script defer src="/__/firebase/10.8.0/firebase-app-compat.js"></script>
-    <script defer src="/__/firebase/10.8.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBz1hgapvwapYHblYf3W2uvhdOoWVZxFLI",
+            authDomain: "desarrolo-panaderia-la-fabrica.firebaseapp.com",
+            projectId: "desarrolo-panaderia-la-fabrica",
+            storageBucket: "desarrolo-panaderia-la-fabrica.firebasestorage.app",
+            messagingSenderId: "444313347033",
+            appId: "1:444313347033:web:7102e2a1b079326d442fc8"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
     <script src="../js/productos.js?v=3"></script>
     <script>
         // Lógica de Menú Móvil
