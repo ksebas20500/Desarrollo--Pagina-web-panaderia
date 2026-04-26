@@ -28,8 +28,11 @@ async function cargarProductosPorCategoria(categoria) {
     const gridContainer = document.getElementById('products-grid-container');
     
     try {
+        // La categoría en la URL viene en minúsculas (ej: "panes"), pero en la BD está con mayúscula inicial ("Panes")
+        const categoriaFormat = categoria.charAt(0).toUpperCase() + categoria.toLowerCase().slice(1);
+
         const querySnapshot = await db.collection('productos')
-            .where('categoria', '==', categoria)
+            .where('categoria', '==', categoriaFormat)
             .get();
             
         const productos = [];
