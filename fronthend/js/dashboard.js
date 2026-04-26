@@ -1,7 +1,13 @@
+const LOCAL_STORAGE_KEY = 'panaderia_productos';
+
+function obtenerProductosLS() {
+    const productos = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return productos ? JSON.parse(productos) : [];
+}
+
 async function cargarDatosDashboard() {
     try {
-        const respuesta = await fetch('http://localhost:8080/api/productos');
-        const productos = await respuesta.json();
+        const productos = obtenerProductosLS();
 
         // 1. Contar estadísticas
         const totalProductos = productos.length;
@@ -56,7 +62,7 @@ async function cargarDatosDashboard() {
         }
 
     } catch (error) {
-        console.error("Error conectando con el backend:", error);
+        console.error("Error conectando con localStorage:", error);
     }
 }
 

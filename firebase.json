@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": "fronthend",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/",
+        "destination": "/page/index.html",
+        "type": 301
+      }
+    ]
+  }
+}

@@ -1,7 +1,17 @@
+const LOCAL_STORAGE_KEY = 'panaderia_productos';
+
+function obtenerProductosLS() {
+    const productos = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return productos ? JSON.parse(productos) : [];
+}
+
+function guardarProductosLS(productos) {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(productos));
+}
+
 async function cargarProductos() {
     try {
-        const respuesta = await fetch('http://localhost:8080/api/productos');
-        const productos = await respuesta.json();
+        const productos = obtenerProductosLS();
 
         const tablaBody = document.getElementById('cuerpo-tabla');
         const contenedorTabla = document.getElementById('products-table-container');
@@ -13,13 +23,10 @@ async function cargarProductos() {
             tablaBody.innerHTML = '';
 
             productos.forEach(p => {
-                // AQUÍ ESTÁ LA LÓGICA DE LA IMAGEN
                 const imagenHtml = p.imagen
                     ? `<img src="${p.imagen}" alt="${p.nombre}" style="width:50px; height:50px; border-radius:8px; object-fit:cover; object-position:center; display:block;">`
                     : `<div class="table-product-placeholder">Sin foto</div>`;
 
-                // Lógica del estado (Activo/Inactivo)
-                // Si p.activo no está definido o es nulo, asumimos true por defecto (para productos viejos)
                 const isActivo = p.activo !== false;
                 
                 const pillHtml = isActivo 
@@ -73,93 +80,60 @@ async function cargarProductos() {
             contenedorTabla.style.display = 'none';
         }
     } catch (error) {
-        console.error("Error conectando con el backend:", error);
+        console.error("Error al cargar productos de localstorage:", error);
     }
 }
 
-// LÓGICA DE ACTIONS (EDITAR, ELIMINAR, ESTADO)
-
-// Función para Redirigir a Editar
 function editarProducto(id) {
-    // Redirigimos a la página del formulario enviando el ID por la URL
     window.location.href = `nuevo-producto.html?id=${id}`;
 }
 
-// Función para Eliminar Permanentemente
 async function eliminarProducto(id) {
     const confirmacion = confirm("¿Estás seguro que deseas eliminar este producto permanentemente?");
     if (!confirmacion) return;
 
-    try {
-        const respuesta = await fetch(`http://localhost:8080/api/productos/${id}`, {
-            method: 'DELETE'
-        });
-
-        if (respuesta.ok) {
-            alert("Producto eliminado correctamente.");
-            cargarProductos(); // Recargamos la tabla
-        } else {
-            alert("Hubo un error al intentar eliminar el producto.");
-        }
-    } catch (error) {
-        console.error("Error eliminando:", error);
-    }
+    let productos = obtenerProductosLS();
+    productos = productos.filter(p => p.id != id);
+    guardarProductosLS(productos);
+    alert("Producto eliminado correctamente.");
+    cargarProductos(); 
 }
 
-// Función para Activar o Desactivar (Cambiar Estado)
 async function cambiarEstado(id, nuevoEstado) {
-    try {
-        const respuesta = await fetch(`http://localhost:8080/api/productos/${id}/estado`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(nuevoEstado)
-        });
-
-        if (respuesta.ok) {
-            cargarProductos(); // Recargamos para ver el cambio visual
-        } else {
-            alert("Error al cambiar el estado del producto.");
-        }
-    } catch (error) {
-        console.error("Error cambiando estado:", error);
+    let productos = obtenerProductosLS();
+    const index = productos.findIndex(p => p.id == id);
+    if (index !== -1) {
+        productos[index].activo = nuevoEstado;
+        guardarProductosLS(productos);
+        cargarProductos();
     }
 }
 
-// Función para VER producto en Modal Flotante
 async function verProducto(id) {
-    try {
-        const respuesta = await fetch(`http://localhost:8080/api/productos/${id}`);
-        if(respuesta.ok){
-            const data = await respuesta.json();
-            
-            // Llenar datos en el Modal HTML
-            document.getElementById('modal-title').innerText = data.nombre;
-            document.getElementById('modal-desc').innerText = data.descripcion ? data.descripcion : "Este producto no tiene una descripción detallada provista.";
-            document.getElementById('modal-category').innerText = data.categoria;
-            document.getElementById('modal-price').innerText = `$${data.precio.toFixed(2)}`;
-            
-            const imgEl = document.getElementById('modal-img');
-            if(data.imagen){
-                imgEl.src = data.imagen;
-                imgEl.style.display = 'block';
-            } else {
-                imgEl.style.display = 'none'; // o cargar una imagen placeholder por defecto
-            }
-
-            // Mostrar el Modal
-            document.getElementById('modal-ver').classList.add('active');
+    const productos = obtenerProductosLS();
+    const data = productos.find(p => p.id == id);
+    if(data) {
+        document.getElementById('modal-title').innerText = data.nombre;
+        document.getElementById('modal-desc').innerText = data.descripcion ? data.descripcion : "Este producto no tiene una descripción detallada provista.";
+        document.getElementById('modal-category').innerText = data.categoria;
+        document.getElementById('modal-price').innerText = `$${data.precio.toFixed(2)}`;
+        
+        const imgEl = document.getElementById('modal-img');
+        if(data.imagen){
+            imgEl.src = data.imagen;
+            imgEl.style.display = 'block';
         } else {
-            alert("Error al cargar los detalles del producto.");
+            imgEl.style.display = 'none';
         }
-    } catch (error) {
-         console.error("Error cargando detalles a ver:", error);
+
+        document.getElementById('modal-ver').classList.add('active');
+    } else {
+        alert("Error al cargar los detalles del producto.");
     }
 }
 
-// Cerrar Modal
 function cerrarModal() {
     document.getElementById('modal-ver').classList.remove('active');
 }
 
-// Ejecutar la función principal cuando el documento cargue
 document.addEventListener('DOMContentLoaded', cargarProductos);

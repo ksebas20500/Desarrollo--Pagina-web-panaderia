@@ -26,8 +26,9 @@ async function cargarProductosPorCategoria(categoria) {
     const gridContainer = document.getElementById('products-grid-container');
     
     try {
-        const respuesta = await fetch(`http://localhost:8080/api/productos/categoria/${categoria}`);
-        const productos = await respuesta.json();
+        const productosLS = localStorage.getItem('panaderia_productos');
+        const todosLosProductos = productosLS ? JSON.parse(productosLS) : [];
+        const productos = todosLosProductos.filter(p => p.categoria.toLowerCase() === categoria.toLowerCase() && p.activo !== false);
         
         // Limpiamos el loader
         gridContainer.innerHTML = '';
