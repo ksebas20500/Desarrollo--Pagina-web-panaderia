@@ -420,7 +420,89 @@ body {
 .products-section {
     background-color: var(--bg-cream);
     /* Mismo fondo del hero */
-    padding: 80px 40px;
+    padding: 60px 40px 80px;
+}
+
+/* Filtros de Categoría Mejorados */
+.category-filters-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px 0 30px;
+    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Ocultar scrollbar para un look más limpio */
+.category-filters-container::-webkit-scrollbar {
+    display: none;
+}
+
+.category-filters {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    min-width: max-content; /* Asegura que no se encojan en móvil */
+    padding: 0 20px;
+    margin: 0 auto;
+}
+
+.category-btn {
+    padding: 12px 24px;
+    border: 1px solid #E5D8CD;
+    color: #665b55;
+    background-color: #ffffff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-family: var(--font-sans);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    cursor: pointer;
+}
+
+.category-btn svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+}
+
+.category-btn:hover {
+    border-color: var(--primary-brown);
+    color: var(--primary-brown);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(140, 73, 18, 0.1);
+}
+
+.category-btn:hover svg {
+    transform: rotate(10deg);
+}
+
+.category-btn.active {
+    background-color: var(--primary-brown);
+    color: white;
+    border-color: var(--primary-brown);
+    box-shadow: 0 8px 25px rgba(139, 94, 52, 0.3);
+    transform: translateY(-2px);
+}
+
+.category-btn.active svg {
+    color: white;
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .category-filters {
+        justify-content: flex-start; /* Permite el scroll desde el inicio */
+    }
+    
+    .category-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }
 
 /* Usamos esta clase para centrar los títulos de las secciones */

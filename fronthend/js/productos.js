@@ -1,13 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Obtener la categoría de la URL
     const urlParams = new URLSearchParams(window.location.search);
-    const categoria = urlParams.get('categoria') || 'panes'; // Por defecto panes si no hay parámetro
+    const categoria = urlParams.get('categoria') || 'todos'; // Por defecto todos
 
-    // 2. Modificar el título de la página
-    document.getElementById('page-title').textContent = categoria;
+    // 2. Modificar el título de la página (se hace en la función)
     
     // 3. Cargar los productos desde el backend
     cargarProductosPorCategoria(categoria);
+
+    // 4. Marcar botón de categoría activo
+    marcarCategoriaActiva(categoria);
 
     // Event listeners para el modal
     document.getElementById('close-modal').addEventListener('click', cerrarModal);
@@ -28,12 +30,17 @@ async function cargarProductosPorCategoria(categoria) {
     const gridContainer = document.getElementById('products-grid-container');
     
     try {
-        // La categoría en la URL viene en minúsculas (ej: "panes"), pero en la BD está con mayúscula inicial ("Panes")
-        const categoriaFormat = categoria.charAt(0).toUpperCase() + categoria.toLowerCase().slice(1);
-
-        const querySnapshot = await db.collection('productos')
-            .where('categoria', '==', categoriaFormat)
-            .get();
+        let querySnapshot;
+        if (categoria === 'todos') {
+            document.getElementById('page-title').textContent = 'Todos los Productos';
+            querySnapshot = await db.collection('productos').get();
+        } else {
+            const categoriaFormat = categoria.charAt(0).toUpperCase() + categoria.toLowerCase().slice(1);
+            document.getElementById('page-title').textContent = categoriaFormat;
+            querySnapshot = await db.collection('productos')
+                .where('categoria', '==', categoriaFormat)
+                .get();
+        }
             
         const productos = [];
         querySnapshot.forEach(doc => {
@@ -99,6 +106,18 @@ async function cargarProductosPorCategoria(categoria) {
     }
 }
 
+// Función para resaltar el botón de la categoría actual
+function marcarCategoriaActiva(categoria) {
+    const buttons = document.querySelectorAll('.category-btn');
+    buttons.forEach(btn => {
+        if (btn.getAttribute('data-category') === categoria) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    });
+}
+
 // Lógica del Modal de WhatsApp
 
 function abrirModalPedido(idProducto) {
@@ -149,13 +168,13 @@ function openWhatsApp(idSede, nombreProducto) {
 
     switch(idSede) {
         case 'Aniversario2':
-            url = `https://api.whatsapp.com/message/CRYAJNQXN6VEA1?autoload=1&app_absent=0&text=Hola,%20quisiera%20pedir:%20${productEncoded}`;
+            url = `https://api.whatsapp.com/send?phone=573215540852&text=Hola%2C%20quisiera%20pedir:%20${productEncoded}`;
             break;
         case 'Garcia':
-            url = `https://api.whatsapp.com/send?phone=573209231806&text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n%20sobre%20el%20producto:%20${productEncoded}`;
+            url = `https://api.whatsapp.com/send?phone=573209231806&text=Hola%2C%20quisiera%20pedir:%20${productEncoded}`;
             break;
         case 'Magdalena':
-            url = `https://api.whatsapp.com/message/VMKQGHCHPE6WL1?autoload=1&app_absent=0&text=Hola,%20quisiera%20pedir:%20${productEncoded}`;
+            url = `https://api.whatsapp.com/send?phone=573215540853&text=Hola%2C%20quisiera%20pedir:%20${productEncoded}`;
             break;
     }
     

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Corporativos | La Fábrica</title>
+
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    
+    <style>
+        .page-header {
+            background-color: var(--bg-cream);
+            padding: 80px 20px 40px;
+            text-align: center;
+        }
+        
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 50px;
+            color: #2D241F;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+
+        .category-breadcrumb {
+            color: var(--primary-brown);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .event-detail-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #665b55;
+            line-height: 1.8;
+            font-size: 18px;
+        }
+
+        .event-detail-section p {
+            margin-bottom: 20px;
+        }
+
+        .contact-cta {
+            text-align: center;
+            margin-top: 40px;
+            padding: 40px;
+            background-color: #fcfbf9;
+            border-radius: 12px;
+            border: 1px solid #efeae6;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: opacity 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-whatsapp:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo" style="text-decoration: none;">
+                <img src="../imagen/logo.png" alt="Logo La Fábrica" class="logo-img">
+                <span>La Fábrica</span>
+            </a>
+
+            <button class="mobile-menu-btn" id="open-menu">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="nav-wrapper" id="mobile-nav">
+                <div class="mobile-nav-header">
+                    <span class="logo-text-mobile">La Fábrica</span>
+                    <button class="close-menu-btn" id="close-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <nav class="nav-links">
+                    <a href="index.html">Inicio</a>
+                    <a href="index.html#servicios">Servicios</a>
+                    <a href="index.html#nosotros">Nosotros</a>
+                    <a href="index.html#sedes">Sedes</a>
+                    
+                    <div class="dropdown-container desktop-menu-item">
+                        <a href="index.html#productos" class="dropdown">Productos <span class="arrow">▼</span></a>
+                        <div class="dropdown-menu">
+                            <a href="productos.html?categoria=panes">Panes</a>
+                            <a href="productos.html?categoria=tortas">Tortas</a>
+                            <a href="productos.html?categoria=postres">Postres</a>
+                        </div>
+                    </div>
+                </nav>
+
+                <a href="index.html#sedes" class="btn-contact">Contáctanos</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <p class="category-breadcrumb">SERVICIO ESPECIALIZADO</p>
+            <h1 class="page-title">Eventos Corporativos</h1>
+        </div>
+
+        <section class="event-detail-section">
+            <img src="../imagen/eventos-corporativos.png" alt="Eventos Corporativos" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <p>En La Fábrica entendemos que la imagen de tu empresa se refleja en cada detalle. Por eso ofrecemos un servicio de catering especializado para reuniones empresariales, conferencias, desayunos de trabajo y eventos corporativos de alto nivel.</p>
+            <p>Nuestro equipo se encarga de preparar una selección premium de nuestros mejores productos artesanales: desde mini croissants, opciones saladas y panes especiales, hasta postres finos que dejarán una excelente impresión en tus clientes y colaboradores.</p>
+            
+            <div class="contact-cta">
+                <h3 style="color: #2D241F; font-family: var(--font-serif); font-size: 24px; margin-bottom: 10px;">¿Deseas una cotización para tu evento?</h3>
+                <p>Escríbenos directamente a la sede más cercana y un asesor te brindará atención personalizada para armar el menú perfecto según tus necesidades.</p>
+                <div style="display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 0 auto; margin-top: 25px;">
+                    <a href="https://api.whatsapp.com/message/CRYAJNQXN6VEA1?autoload=1&app_absent=0" target="_blank" class="btn-whatsapp">
+                        Sede Aniversario 2
+                    </a>
+                    <a href="https://api.whatsapp.com/send?phone=573209231806" target="_blank" class="btn-whatsapp">
+                        Sede García Herreros
+                    </a>
+                    <a href="https://api.whatsapp.com/message/VMKQGHCHPE6WL1?autoload=1&app_absent=0" target="_blank" class="btn-whatsapp">
+                        Sede Magdalena
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="footer-logo">La Fábrica</h3>
+                <p>Más de 15 años llevando el auténtico sabor del pan artesanal a cada hogar. Tradición, calidad y amor en cada producto.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/lafabricapanaderia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.facebook.com/p/Panader%C3%ADa-La-F%C3%A1brica-100084716544791/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#servicios">Servicios</a></li>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="index.html#sedes">Sedes</a></li>
+                    <li><a href="index.html#eventos">Eventos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="productos.html?categoria=panes">Panes</a></li>
+                    <li><a href="productos.html?categoria=tortas">Tortas</a></li>
+                    <li><a href="productos.html?categoria=postres">Postres</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul class="contact-info">
+                    <li>📞 +57 320 923 1806</li>
+                    <li>✉️ info@lafabrica.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Fábrica. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Lógica de Menú Móvil
+        const openMenuBtn = document.getElementById('open-menu');
+        const closeMenuBtn = document.getElementById('close-menu');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        openMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('active');
+        });
+    </script>
+</body>
+
+</html>

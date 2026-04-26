@@ -135,6 +135,23 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* Ajuste de loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-brown);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+            grid-column: 1 / -1;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 
@@ -195,6 +212,26 @@
         </div>
 
         <section class="products-section" style="padding-top: 20px;">
+            <div class="category-filters-container">
+                <div class="category-filters" id="category-buttons">
+                    <a href="productos.html?categoria=todos" class="category-btn" data-category="todos">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                        Todos
+                    </a>
+                    <a href="productos.html?categoria=panes" class="category-btn" data-category="panes">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10a5 5 0 0 1 10 0v4a5 5 0 0 1-10 0z"></path><path d="M5 20h14"></path><path d="M12 15v5"></path></svg>
+                        Panes
+                    </a>
+                    <a href="productos.html?categoria=tortas" class="category-btn" data-category="tortas">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"></path><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"></path><path d="M2 21h20"></path><path d="M7 8v3"></path><path d="M12 8v3"></path><path d="M17 8v3"></path><path d="M7 4h.01"></path><path d="M12 4h.01"></path><path d="M17 4h.01"></path></svg>
+                        Tortas
+                    </a>
+                    <a href="productos.html?categoria=postres" class="category-btn" data-category="postres">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M16 12l-4-4-4 4 4 4 4-4z"></path></svg>
+                        Postres
+                    </a>
+                </div>
+            </div>
             <div class="products-grid" id="products-grid-container">
                 <div class="loader" id="loader"></div>
             </div>
