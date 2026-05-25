@@ -1,7 +1,7 @@
 # ==========================================
 # Etapa 1: Construcción (Build Stage)
 # ==========================================
-FROM maven:3.8.5-openjdk-17 AS build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copiar archivos del proyecto
@@ -14,7 +14,7 @@ RUN mvn clean package -DskipTests
 # ==========================================
 # Etapa 2: Ejecución (Run Stage)
 # ==========================================
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jre
 WORKDIR /app
 
 # Copiar el archivo JAR compilado desde la etapa de construcción
