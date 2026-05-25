@@ -6,3 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // - Menú desplegable en teléfonos móviles
     // - Lógica para mostrar los productos del catálogo
 });
+setInterval(() => {
+    fetch('https://desarrollo-pagina-web-panaderia.onrender.com/api/productos')
+        .catch(() => { }); // silencioso
+}, 600000);
