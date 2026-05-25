@@ -251,24 +251,51 @@
     </div>
 
     <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="footer-logo">La Fábrica</h3>
+                <p>Más de 15 años llevando el auténtico sabor del pan artesanal a cada hogar. Tradición, calidad y amor en cada producto.</p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/lafabricapanaderia/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://www.facebook.com/p/Panader%C3%ADa-La-F%C3%A1brica-100084716544791/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Enlaces</h4>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="index.html#servicios">Servicios</a></li>
+                    <li><a href="index.html#nosotros">Nosotros</a></li>
+                    <li><a href="index.html#sedes">Sedes</a></li>
+                    <li><a href="index.html#eventos">Eventos</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Productos</h4>
+                <ul>
+                    <li><a href="productos.html?categoria=panes">Panes</a></li>
+                    <li><a href="productos.html?categoria=tortas">Tortas</a></li>
+                    <li><a href="productos.html?categoria=postres">Postres</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contacto</h4>
+                <ul class="contact-info">
+                    <li>📞 +57 320 923 1806</li>
+                    <li>✉️ info@lafabrica.com</li>
+                </ul>
+            </div>
+        </div>
         <div class="footer-bottom">
             <p>&copy; 2026 La Fábrica. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBz1hgapvwapYHblYf3W2uvhdOoWVZxFLI",
-            authDomain: "desarrolo-panaderia-la-fabrica.firebaseapp.com",
-            projectId: "desarrolo-panaderia-la-fabrica",
-            storageBucket: "desarrolo-panaderia-la-fabrica.firebasestorage.app",
-            messagingSenderId: "444313347033",
-            appId: "1:444313347033:web:7102e2a1b079326d442fc8"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
+    <script src="../js/config.js"></script>
     <script src="../js/productos.js?v=3"></script>
     <script>
         // Lógica de Menú Móvil

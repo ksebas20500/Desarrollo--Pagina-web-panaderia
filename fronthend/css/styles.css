@@ -1230,7 +1230,7 @@ body {
         box-sizing: border-box;
     }
 
-    /* --- RESTO DE LA PÁGINA (Ajuste 1 columna) --- */
+    /* --- RESTO DE LA PÁGINA (Ajuste responsivo mejorado) --- */
     .services-section,
     .products-section,
     .about-section,
@@ -1244,11 +1244,12 @@ body {
         font-size: 32px;
     }
 
+    /* Cuadrículas en Tablet (2 columnas) */
     .services-grid,
     .products-grid,
     .sedes-grid,
     .events-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
 
@@ -1258,10 +1259,23 @@ body {
         text-align: center;
     }
 
+    /* Footer en Tablet (2 columnas) */
     .footer-container {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+        gap: 40px;
+    }
+
+    .footer-col:first-child {
+        grid-column: 1 / -1;
         text-align: center;
-        gap: 30px;
+    }
+
+    .footer-col:first-child p {
+        padding-right: 0;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .social-icons {
@@ -1287,5 +1301,84 @@ body {
         font-weight: 500;
         text-decoration: none;
         width: 100%;
+    }
+}
+
+/* Ajustes específicos para móviles (Celulares) */
+@media (max-width: 600px) {
+    .services-grid,
+    .sedes-grid,
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Productos en 2 columnas en móvil */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .product-image {
+        height: 140px;
+    }
+
+    .product-info {
+        padding: 12px;
+    }
+
+    .product-info h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .product-desc {
+        font-size: 11px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        margin-bottom: 8px;
+    }
+
+    .btn-outline {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    /* Footer compacto en móvil */
+    .footer-container {
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer-col:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .footer-col:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .footer-col h4::after {
+        content: '';
+        display: block;
+        width: 30px;
+        height: 2px;
+        background: var(--highlight-gold);
+        margin: 8px auto;
+    }
+
+    .footer-bottom {
+        margin-top: 25px;
+        padding-top: 15px;
+    }
+}
+
+/* Pantallas muy pequeñas */
+@media (max-width: 360px) {
+    .products-grid {
+        grid-template-columns: 1fr;
     }
 }

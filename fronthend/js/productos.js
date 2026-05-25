@@ -3,12 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const categoria = urlParams.get('categoria') || 'todos'; // Por defecto todos
 
-    // 2. Modificar el título de la página (se hace en la función)
-    
-    // 3. Cargar los productos desde el backend
+    // 2. Cargar los productos desde el backend
     cargarProductosPorCategoria(categoria);
 
-    // 4. Marcar botón de categoría activo
+    // 3. Marcar botón de categoría activo
     marcarCategoriaActiva(categoria);
 
     // Event listeners para el modal
@@ -23,33 +21,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let cacheProductos = {};
-let db;
 
 async function cargarProductosPorCategoria(categoria) {
-    if (!db) db = firebase.firestore();
     const gridContainer = document.getElementById('products-grid-container');
+    gridContainer.innerHTML = '<div class="loader-container"><div class="loader"></div><p>Cargando delicias...</p></div>';
     
     try {
-        let querySnapshot;
+        let url = '';
         if (categoria === 'todos') {
             document.getElementById('page-title').textContent = 'Todos los Productos';
-            querySnapshot = await db.collection('productos').get();
+            url = `${API_BASE_URL}/api/productos`;
         } else {
             const categoriaFormat = categoria.charAt(0).toUpperCase() + categoria.toLowerCase().slice(1);
             document.getElementById('page-title').textContent = categoriaFormat;
-            querySnapshot = await db.collection('productos')
-                .where('categoria', '==', categoriaFormat)
-                .get();
+            url = `${API_BASE_URL}/api/productos/categoria/${categoriaFormat}`;
         }
             
-        const productos = [];
-        querySnapshot.forEach(doc => {
-            const data = doc.data();
-            // Filtrar inactivos (solo mostrar si activo es true o undefined por compatibilidad)
-            if (data.activo !== false) {
-                productos.push({ id: doc.id, ...data });
-            }
-        });
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        let productos = await response.json();
+        
+        // Si pedimos 'todos', el backend nos devuelve activos e inactivos,
+        // así que filtramos en el cliente para mostrar solo los activos en el catálogo público.
+        if (categoria === 'todos') {
+            productos = productos.filter(p => p.activo !== false);
+        }
         
         // Limpiamos el loader
         gridContainer.innerHTML = '';
@@ -97,10 +96,10 @@ async function cargarProductosPorCategoria(categoria) {
         });
 
     } catch (error) {
-        console.error("Error al cargar productos de Firestore:", error);
+        console.error("Error al cargar productos del backend Java:", error);
         gridContainer.innerHTML = `
             <div class="empty-state">
-                <p>Ocurrió un error al cargar los productos. Por favor intenta recargar la página.</p>
+                <p>Ocurrió un error al conectar con el servidor. Asegúrate de que el backend esté ejecutándose.</p>
             </div>
         `;
     }
@@ -119,7 +118,6 @@ function marcarCategoriaActiva(categoria) {
 }
 
 // Lógica del Modal de WhatsApp
-
 function abrirModalPedido(idProducto) {
     const producto = cacheProductos[idProducto];
     if (!producto) return;

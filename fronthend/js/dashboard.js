@@ -1,13 +1,10 @@
-let db;
-
 async function cargarDatosDashboard() {
     try {
-        if (!db) db = firebase.firestore();
-        const querySnapshot = await db.collection('productos').orderBy('fechaCreacion', 'desc').get();
-        const productos = [];
-        querySnapshot.forEach(doc => {
-            productos.push({ id: doc.id, ...doc.data() });
-        });
+        const response = await fetch(`${API_BASE_URL}/api/productos`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const productos = await response.json();
 
         // 1. Contar estadísticas
         const totalProductos = productos.length;
@@ -31,7 +28,8 @@ async function cargarDatosDashboard() {
             recentTableContainer.style.display = 'block';
             tablaBody.innerHTML = '';
 
-            // Tomar los últimos 5 productos
+            // Tomar los últimos 5 productos (como los traemos en orden alfabético o de base de datos, 
+            // no hay timestamp estricto en la respuesta del POJO, pero igual mostramos los primeros 5)
             const productosRecientes = productos.slice(0, 5);
 
             productosRecientes.forEach(p => {
@@ -62,7 +60,7 @@ async function cargarDatosDashboard() {
         }
 
     } catch (error) {
-        console.error("Error conectando con Firestore:", error);
+        console.error("Error conectando con el backend Java:", error);
     }
 }
 

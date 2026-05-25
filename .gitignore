@@ -14,3 +14,12 @@ ui-debug.log*
 # OS
 .DS_Store
 Thumbs.db
+# documentacion del proyecto
+DOCUMENTACION_PROYECTO.md
+DOCUMENCTACION.md
+
+# Firebase Service Account Credentials
+serviceAccountKey.json
+**/serviceAccountKey.json
+*.db
+**/web_deria.db

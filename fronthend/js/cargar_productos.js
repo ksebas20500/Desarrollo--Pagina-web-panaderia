@@ -1,13 +1,10 @@
-let db;
-
 async function cargarProductos() {
     try {
-        if (!db) db = firebase.firestore();
-        const querySnapshot = await db.collection('productos').orderBy('fechaCreacion', 'desc').get();
-        const productos = [];
-        querySnapshot.forEach(doc => {
-            productos.push({ id: doc.id, ...doc.data() });
-        });
+        const response = await fetch(`${API_BASE_URL}/api/productos`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const productos = await response.json();
 
         const tablaBody = document.getElementById('cuerpo-tabla');
         const contenedorTabla = document.getElementById('products-table-container');
@@ -76,7 +73,10 @@ async function cargarProductos() {
             contenedorTabla.style.display = 'none';
         }
     } catch (error) {
-        console.error("Error al cargar productos de Firestore:", error);
+        console.error("Error al cargar productos desde el backend:", error);
+        const mensajeVacio = document.getElementById('empty-products-msg');
+        mensajeVacio.innerHTML = `<p style="color:#b91c1c;">Error al conectar con el servidor backend Java.</p>`;
+        mensajeVacio.style.display = 'flex';
     }
 }
 
@@ -89,18 +89,32 @@ async function eliminarProducto(id) {
     if (!confirmacion) return;
 
     try {
-        await db.collection('productos').doc(id).delete();
+        const response = await fetch(`${API_BASE_URL}/api/productos/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         alert("Producto eliminado correctamente.");
         cargarProductos(); 
     } catch (error) {
         console.error("Error al eliminar producto:", error);
-        alert("Error al eliminar el producto.");
+        alert("Error al eliminar el producto del backend.");
     }
 }
 
 async function cambiarEstado(id, nuevoEstado) {
     try {
-        await db.collection('productos').doc(id).update({ activo: nuevoEstado });
+        const response = await fetch(`${API_BASE_URL}/api/productos/${id}/estado`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(nuevoEstado)
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         cargarProductos();
     } catch (error) {
         console.error("Error al cambiar estado:", error);
@@ -110,26 +124,26 @@ async function cambiarEstado(id, nuevoEstado) {
 
 async function verProducto(id) {
     try {
-        const docRef = await db.collection('productos').doc(id).get();
-        if (docRef.exists) {
-            const data = docRef.data();
-            document.getElementById('modal-title').innerText = data.nombre;
-            document.getElementById('modal-desc').innerText = data.descripcion ? data.descripcion : "Este producto no tiene una descripción detallada provista.";
-            document.getElementById('modal-category').innerText = data.categoria;
-            document.getElementById('modal-price').innerText = `$${data.precio.toFixed(2)}`;
-            
-            const imgEl = document.getElementById('modal-img');
-            if(data.imagen){
-                imgEl.src = data.imagen;
-                imgEl.style.display = 'block';
-            } else {
-                imgEl.style.display = 'none';
-            }
-
-            document.getElementById('modal-ver').classList.add('active');
-        } else {
-            alert("El producto no existe.");
+        const response = await fetch(`${API_BASE_URL}/api/productos/${id}`);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
+        const data = await response.json();
+        
+        document.getElementById('modal-title').innerText = data.nombre;
+        document.getElementById('modal-desc').innerText = data.descripcion ? data.descripcion : "Este producto no tiene una descripción detallada provista.";
+        document.getElementById('modal-category').innerText = data.categoria;
+        document.getElementById('modal-price').innerText = `$${data.precio.toFixed(2)}`;
+        
+        const imgEl = document.getElementById('modal-img');
+        if (data.imagen) {
+            imgEl.src = data.imagen;
+            imgEl.style.display = 'block';
+        } else {
+            imgEl.style.display = 'none';
+        }
+
+        document.getElementById('modal-ver').classList.add('active');
     } catch (error) {
         console.error("Error al ver producto:", error);
         alert("Error al cargar los detalles del producto.");

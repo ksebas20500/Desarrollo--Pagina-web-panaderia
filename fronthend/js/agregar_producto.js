@@ -1,7 +1,4 @@
-let db;
-
 document.addEventListener('DOMContentLoaded', async () => {
-    db = firebase.firestore();
     const formulario = document.getElementById('form-producto');
     let imagenBase64 = ""; 
 
@@ -15,29 +12,32 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (botonGuardar) botonGuardar.textContent = "Guardar Cambios";
 
         try {
-            const docRef = await db.collection('productos').doc(productoId).get();
-            if (docRef.exists) {
-                const data = docRef.data();
-                document.getElementById('nombre').value = data.nombre;
-                if (data.descripcion) {
-                    document.getElementById('descripcion').value = data.descripcion;
-                }
-                document.getElementById('precio').value = data.precio;
-                document.getElementById('categoria').value = data.categoria;
+            const response = await fetch(`${API_BASE_URL}/api/productos/${productoId}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            
+            document.getElementById('nombre').value = data.nombre;
+            if (data.descripcion) {
+                document.getElementById('descripcion').value = data.descripcion;
+            }
+            document.getElementById('precio').value = data.precio;
+            document.getElementById('categoria').value = data.categoria;
 
-                if (data.sedeAniversario !== undefined) document.getElementById('sede-aniversario').checked = data.sedeAniversario;
-                if (data.sedeGarcia !== undefined) document.getElementById('sede-garcia').checked = data.sedeGarcia;
-                if (data.sedeMagdalena !== undefined) document.getElementById('sede-magdalena').checked = data.sedeMagdalena;
+            if (data.sedeAniversario !== undefined) document.getElementById('sede-aniversario').checked = data.sedeAniversario;
+            if (data.sedeGarcia !== undefined) document.getElementById('sede-garcia').checked = data.sedeGarcia;
+            if (data.sedeMagdalena !== undefined) document.getElementById('sede-magdalena').checked = data.sedeMagdalena;
 
-                if (data.imagen) {
-                    imagenBase64 = data.imagen; 
-                    document.getElementById('preview-imagen').src = imagenBase64;
-                    document.getElementById('preview-container').style.display = 'block';
-                    document.getElementById('upload-box').style.display = 'none';
-                }
+            if (data.imagen) {
+                imagenBase64 = data.imagen; 
+                document.getElementById('preview-imagen').src = imagenBase64;
+                document.getElementById('preview-container').style.display = 'block';
+                document.getElementById('upload-box').style.display = 'none';
             }
         } catch (error) {
             console.error("Error al obtener el producto:", error);
+            alert("No se pudo cargar la información del producto.");
         }
     }
 
@@ -90,22 +90,36 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
+                let response;
                 if (productoId) {
-                    // Update if editing
-                    // We don't overwrite activo if not needed, but we don't have it locally.
-                    // Better to just update specific fields.
-                    await db.collection('productos').doc(productoId).update(productoPayload);
-                    alert('¡Producto actualizado exitosamente!');
+                    // Update if editing (PUT)
+                    response = await fetch(`${API_BASE_URL}/api/productos/${productoId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(productoPayload)
+                    });
                 } else {
-                    // Create new
-                    productoPayload.fechaCreacion = firebase.firestore.FieldValue.serverTimestamp();
-                    await db.collection('productos').add(productoPayload);
-                    alert('¡Producto creado exitosamente!');
+                    // Create new (POST)
+                    response = await fetch(`${API_BASE_URL}/api/productos`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(productoPayload)
+                    });
                 }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                alert(productoId ? '¡Producto actualizado exitosamente!' : '¡Producto creado exitosamente!');
                 window.location.href = 'productos.html';
             } catch (error) {
-                console.error("Error al guardar en Firestore:", error);
-                alert("Error al guardar el producto. Asegúrate de tener permisos.");
+                console.error("Error al guardar en el backend Java:", error);
+                alert("Error al guardar el producto. Verifica que el servidor backend esté corriendo.");
             }
         });
     }

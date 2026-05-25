@@ -1,7 +1,7 @@
 package com.panaderia.backend.controller;
 
 import com.panaderia.backend.model.Producto;
-import com.panaderia.backend.repository.ProductoRepository;
+import com.panaderia.backend.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,67 +13,48 @@ import java.util.List;
 public class ProductoController {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductoService productoService;
 
-    // MÉTODO 1: Trae todos los productos de la base de datos web_deria.db
+    // MÉTODO 1: Trae todos los productos de Firestore
     @GetMapping
-    public List<Producto> getProductos() {
-        return productoRepository.findAll();
+    public List<Producto> getProductos() throws Exception {
+        return productoService.obtenerTodos();
     }
 
     // MÉTODO NUEVO: Trae productos filtrados por categoría y que estén activos
     @GetMapping("/categoria/{categoria}")
-    public List<Producto> getProductosPorCategoria(@PathVariable String categoria) {
-        return productoRepository.findByCategoriaIgnoreCaseAndActivoTrue(categoria);
+    public List<Producto> getProductosPorCategoria(@PathVariable String categoria) throws Exception {
+        return productoService.obtenerPorCategoria(categoria);
     }
 
     // MÉTODO 1.5: Trae un solo producto por su ID (útil para la página de editar)
     @GetMapping("/{id}")
-    public Producto getProductoPorId(@PathVariable Long id) {
-        return productoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id));
+    public Producto getProductoPorId(@PathVariable String id) throws Exception {
+        return productoService.obtenerPorId(id);
     }
 
-    // MÉTODO 2: Recibe un producto del formulario y lo guarda en la base de datos
+    // MÉTODO 2: Recibe un producto del formulario y lo guarda en Firestore
     @PostMapping
-    public Producto crearProducto(@RequestBody Producto nuevoProducto) {
-        return productoRepository.save(nuevoProducto);
+    public Producto crearProducto(@RequestBody Producto nuevoProducto) throws Exception {
+        return productoService.crear(nuevoProducto);
     }
 
     // MÉTODO 3: Elimina un producto por su ID permanentemente
     @DeleteMapping("/{id}")
-    public void eliminarProducto(@PathVariable Long id) {
-        productoRepository.deleteById(id);
+    public void eliminarProducto(@PathVariable String id) throws Exception {
+        productoService.eliminar(id);
     }
 
     // MÉTODO 4: Actualiza la información de un producto existente (Editar)
     @PutMapping("/{id}")
-    public Producto actualizarProducto(@PathVariable Long id, @RequestBody Producto productoActualizado) {
-        // Busca en la base de datos el producto con ese ID, si lo encuentra modifica sus datos.
-        return productoRepository.findById(id).map(producto -> {
-            producto.setNombre(productoActualizado.getNombre());
-            producto.setDescripcion(productoActualizado.getDescripcion());
-            producto.setPrecio(productoActualizado.getPrecio());
-            producto.setCategoria(productoActualizado.getCategoria());
-            
-            // Actualización de Sucursales (Se hace validación en caso de que lleguen nulos)
-            producto.setSedeAniversario(productoActualizado.getSedeAniversario() != null ? productoActualizado.getSedeAniversario() : true);
-            producto.setSedeGarcia(productoActualizado.getSedeGarcia() != null ? productoActualizado.getSedeGarcia() : true);
-            producto.setSedeMagdalena(productoActualizado.getSedeMagdalena() != null ? productoActualizado.getSedeMagdalena() : true);
-            
-            if (productoActualizado.getImagen() != null) {
-                producto.setImagen(productoActualizado.getImagen());
-            }
-            return productoRepository.save(producto);
-        }).orElseThrow(() -> new RuntimeException("Producto no encontrado con id " + id)); // Error si el ID no existe
+    public Producto actualizarProducto(@PathVariable String id, @RequestBody Producto productoActualizado) throws Exception {
+        return productoService.actualizar(id, productoActualizado);
     }
 
     // MÉTODO 5: Cambia únicamente el estado activo/inactivo (Activar/Desactivar)
     @PatchMapping("/{id}/estado")
-    public Producto cambiarEstado(@PathVariable Long id, @RequestBody Boolean activo) {
-        return productoRepository.findById(id).map(producto -> {
-            producto.setActivo(activo);
-            return productoRepository.save(producto);
-        }).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    public Producto cambiarEstado(@PathVariable String id, @RequestBody Boolean activo) throws Exception {
+        productoService.cambiarEstado(id, activo);
+        return productoService.obtenerPorId(id);
     }
 }
