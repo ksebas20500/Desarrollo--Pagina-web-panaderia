@@ -4,7 +4,7 @@
 
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white) 
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white) 
-![Postgresql](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white) 
+![Postgresql](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white) 
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) 
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) 
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -44,7 +44,7 @@ El proyecto está diseñado sobre una sólida y moderna arquitectura Cliente-Ser
 * **Java 17**: Lenguaje backend principal compilado, robusto y versátil aportando seguridad y organización.
 * **Spring Boot (3.2.4)**: Framework para orquestación de la arquitectura RESTful API de forma rápida, recibiendo cruces de peticiones externas (CORS).
 * **Spring Data JPA & Hibernate**: Implementación de mapeo de clases para gobernar las consultas y guardados sin inyección forzada de SQL, modernizando el código.
-* **SQLite**: La capa base de datos, escogida por su inmensa ligereza y facilidad de traspaso en el mismo repositorio, residiendo en un simple archivo `web_deria.db`.
+* **postgresql**: La capa base de datos, escogida por su inmensa ligereza y facilidad de traspaso en el mismo repositorio, residiendo en un simple archivo `web_deria.sql`.
 
 ---
 
@@ -57,7 +57,7 @@ pagina_web_panaderia/
 │   ├── src/main/java.../      # Código fuente Java (Controladores, Modelos, Repositorios JPA)
 │   ├── src/main/resources/    # Configuración de base de datos (application.properties)
 │   ├── pom.xml                # Dependencias de Maven (Instalador principal)
-│   └── web_deria.db           # Base de Datos SQLite alojando el stock actual
+│   └── web_deria.sql           # Base de Datos SQLite alojando el stock actual
 │
 └── fronthend/                 # 🎨 Interfaz de Usuario
     ├── css/                   # Hojas de estilo estructuradas generales y para admin
