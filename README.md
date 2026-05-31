@@ -57,7 +57,7 @@ pagina_web_panaderia/
 │   ├── src/main/java.../      # Código fuente Java (Controladores, Modelos, Repositorios JPA)
 │   ├── src/main/resources/    # Configuración de base de datos (application.properties)
 │   ├── pom.xml                # Dependencias de Maven (Instalador principal)
-│   └── web_deria.sql           # Base de Datos SQLite alojando el stock actual
+│   └── web_deria.sql           # Base de Datos PostgreSQL alojando el stock actual
 │
 └── fronthend/                 # 🎨 Interfaz de Usuario
     ├── css/                   # Hojas de estilo estructuradas generales y para admin
