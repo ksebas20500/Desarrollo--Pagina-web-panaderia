@@ -7,4 +7,4 @@ const API_BASE_URL = (
     window.location.protocol === 'file:'
 )
     ? 'http://localhost:8080'
-    : 'https://desarrollo-pagina-web-panaderia.onrender.com'; // ← URL correcta de Render
+    : 'https://desarrollo-pagina-web-panaderia.onrender.com';

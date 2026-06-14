@@ -528,22 +528,36 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Añadimos esto para un movimiento suave */
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 /* NUEVO: Efecto al pasar el mouse sobre la tarjeta del producto */
 .product-card:hover {
-    transform: translateY(-10px);
-    /* Levanta la tarjeta 10 píxeles hacia arriba */
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    /* Hace la sombra más grande para dar efecto 3D */
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
 }
 
 .product-image {
     width: 100%;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+#panes .product-image {
+    object-position: center 60%;
+}
+
+#tortas .product-image {
+    object-position: center 30%;
+}
+
+#postres .product-image {
+    object-position: center 38%;
 }
 
 .product-info {
@@ -643,12 +657,13 @@ body {
 /* Estilos de la imagen */
 .about-img {
     width: 100%;
-    height: auto;
+    height: 480px;
     border-radius: 16px;
     /* Bordes redondeados como en la foto */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     /* Sombra elegante */
     object-fit: cover;
+    object-position: center;
 }
 
 /* Textos de la columna derecha */
@@ -775,89 +790,126 @@ body {
     /* Alinea el icono un poquito hacia abajo para que coincida con el texto */
 }
 
-/* --- SECCIÓN DE EVENTOS --- */
-.events-section {
-    background-color: #241D18;
-    /* Un marrón muy oscuro, casi negro */
-    padding: 100px 40px;
+/* --- LOADER DE PAN ANIMADO (CREATIVO) --- */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 0;
+    grid-column: 1 / -1;
+    width: 100%;
 }
 
-/* Utilidades para texto sobre fondo oscuro */
-.text-white {
-    color: #ffffff !important;
+.loader-bread {
+    position: relative;
+    width: 80px;
+    height: 50px;
+    margin-bottom: 20px;
+    animation: bakeBread 2.2s ease-in-out infinite;
 }
 
-.text-light {
-    color: #A89D95 !important;
+.bread-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f2c078 0%, #c37d2e 100%);
+    border: 3.5px solid #6e3b0e;
+    border-radius: 25px 25px 18px 18px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(110, 59, 14, 0.2);
+    overflow: hidden;
 }
 
-.events-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
+/* Cortes del pan */
+.bread-cut {
+    position: absolute;
+    width: 7px;
+    height: 25px;
+    background-color: #ffdca3;
+    border-radius: 4px;
+    transform: rotate(28deg);
+    top: 9px;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.15);
 }
 
-.event-card {
-    background-color: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    /* Borde sutil transparente */
-    border-radius: 12px;
-    padding: 40px 30px;
-    text-align: center;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-}
+.cut-1 { left: 16px; }
+.cut-2 { left: 34px; }
+.cut-3 { left: 52px; }
 
-.event-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--highlight-gold);
-    /* El borde se pinta dorado al pasar el mouse */
-}
-
-.event-icon {
-    background-color: #3A2E26;
-    /* Círculo marrón oscuro */
-    color: var(--highlight-gold);
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
+/* Contenedor del vapor */
+.bread-steam-container {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    width: 100%;
+    height: 25px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 0 auto 25px auto;
+    gap: 12px;
 }
 
-.event-card h3 {
+.bread-steam {
+    width: 4px;
+    height: 12px;
+    background-color: #dcb589;
+    border-radius: 2px;
+    opacity: 0;
+    animation: riseSteam 2.2s infinite;
+}
+
+.steam-1 { animation-delay: 0.3s; }
+.steam-2 { animation-delay: 0.9s; }
+.steam-3 { animation-delay: 1.5s; }
+
+/* Texto de carga pulsante */
+.loader-text {
     font-family: var(--font-serif);
-    font-size: 22px;
-    color: #ffffff;
-    margin-bottom: 15px;
+    font-size: 18px;
+    color: var(--primary-brown);
+    font-weight: 600;
+    margin: 10px 0 0 0;
+    letter-spacing: 0.5px;
+    animation: pulseText 1.5s ease-in-out infinite alternate;
 }
 
-.event-card p {
-    color: #A89D95;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 30px;
+/* Animaciones */
+@keyframes bakeBread {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-8px) scale(1.08); /* Leudando / Subiendo */
+        box-shadow: 0 15px 25px rgba(110, 59, 14, 0.25);
+    }
+    100% {
+        transform: translateY(0) scale(1);
+    }
 }
 
-/* Botón de Eventos */
-.btn-event {
-    background-color: #ffffff;
-    color: #241D18;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+@keyframes riseSteam {
+    0% {
+        transform: translateY(12px) scaleY(0.4);
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.6;
+    }
+    50% {
+        transform: translateY(-2px) scaleY(1.3);
+        opacity: 0.8;
+    }
+    80% {
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(-12px) scaleY(0.6);
+        opacity: 0;
+    }
 }
 
-.btn-event:hover {
-    background-color: var(--highlight-gold);
-    color: #ffffff;
+@keyframes pulseText {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
 }
 
 /* --- FOOTER (PIE DE PÁGINA) --- */
@@ -1074,8 +1126,7 @@ body {
     .services-section,
     .products-section,
     .about-section,
-    .sedes-section,
-    .events-section {
+    .sedes-section {
         padding: 60px 20px;
     }
 
@@ -1086,8 +1137,7 @@ body {
 
     .services-grid,
     .products-grid,
-    .sedes-grid,
-    .events-grid {
+    .sedes-grid {
         grid-template-columns: 1fr;
         gap: 20px;
     }
@@ -1096,6 +1146,10 @@ body {
         grid-template-columns: 1fr;
         gap: 30px;
         text-align: center;
+    }
+
+    .about-img {
+        height: 380px;
     }
 
     .footer-container {
@@ -1234,8 +1288,7 @@ body {
     .services-section,
     .products-section,
     .about-section,
-    .sedes-section,
-    .events-section {
+    .sedes-section {
         padding: 60px 20px;
     }
 
@@ -1247,8 +1300,7 @@ body {
     /* Cuadrículas en Tablet (2 columnas) */
     .services-grid,
     .products-grid,
-    .sedes-grid,
-    .events-grid {
+    .sedes-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
@@ -1307,8 +1359,7 @@ body {
 /* Ajustes específicos para móviles (Celulares) */
 @media (max-width: 600px) {
     .services-grid,
-    .sedes-grid,
-    .events-grid {
+    .sedes-grid {
         grid-template-columns: 1fr;
     }
 
@@ -1320,6 +1371,10 @@ body {
 
     .product-image {
         height: 140px;
+    }
+
+    .about-img {
+        height: 250px;
     }
 
     .product-info {

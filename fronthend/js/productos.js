@@ -24,7 +24,23 @@ let cacheProductos = {};
 
 async function cargarProductosPorCategoria(categoria) {
     const gridContainer = document.getElementById('products-grid-container');
-    gridContainer.innerHTML = '<div class="loader-container"><div class="loader"></div><p>Cargando delicias...</p></div>';
+    gridContainer.innerHTML = `
+        <div class="loader-container">
+            <div class="loader-bread">
+                <div class="bread-body">
+                    <div class="bread-cut cut-1"></div>
+                    <div class="bread-cut cut-2"></div>
+                    <div class="bread-cut cut-3"></div>
+                </div>
+                <div class="bread-steam-container">
+                    <div class="bread-steam steam-1"></div>
+                    <div class="bread-steam steam-2"></div>
+                    <div class="bread-steam steam-3"></div>
+                </div>
+            </div>
+            <p class="loader-text">Cocinando delicias...</p>
+        </div>
+    `;
     
     try {
         let url = '';
