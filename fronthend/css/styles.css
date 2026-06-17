@@ -1372,8 +1372,8 @@ body {
         gap: 12px;
     }
 
-    .product-image {
-        height: 140px;
+    .product-image-wrapper {
+        height: 180px;
     }
 
     .about-img {
