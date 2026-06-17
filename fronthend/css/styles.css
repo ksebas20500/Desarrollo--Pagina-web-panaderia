@@ -561,6 +561,16 @@ body {
     transform: scale(1.06);
 }
 
+/* Específico para las tarjetas de categoría en el index (deben ser uniformes) */
+#productos .product-image-wrapper {
+    height: 300px;
+}
+
+#productos .product-image {
+    height: 100%;
+    object-fit: cover;
+}
+
 .product-info {
     padding: 30px;
     display: flex;
@@ -1372,6 +1382,10 @@ body {
 
     .product-image-wrapper {
         height: auto;
+    }
+
+    #productos .product-image-wrapper {
+        height: 200px;
     }
 
     .about-img {
