@@ -5,6 +5,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const productoId = urlParams.get('id');
 
+    // ─────────────────────────────────────────
+    // Utilidad: Comprimir imagen antes de Base64
+    // ─────────────────────────────────────────
+    function comprimirImagen(file, maxWidth = 900, calidad = 0.75) {
+        return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > maxWidth) {
+                        height = Math.round((height * maxWidth) / width);
+                        width = maxWidth;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    resolve(canvas.toDataURL('image/jpeg', calidad));
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
     if (productoId) {
         const tituloPagina = document.querySelector('.page-title');
         const botonGuardar = document.querySelector('.form-actions .btn-primary');
@@ -43,19 +74,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const inputImagen = document.getElementById('imagen');
     if (inputImagen) {
-        inputImagen.addEventListener('change', function (event) {
+        inputImagen.addEventListener('change', async function (event) {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    imagenBase64 = e.target.result; 
+                // Comprimir la imagen antes de guardarla como Base64
+                imagenBase64 = await comprimirImagen(file);
 
-                    document.getElementById('preview-imagen').src = imagenBase64;
-                    document.getElementById('preview-container').style.display = 'block';
-
-                    document.getElementById('upload-box').style.display = 'none';
-                };
-                reader.readAsDataURL(file);
+                document.getElementById('preview-imagen').src = imagenBase64;
+                document.getElementById('preview-container').style.display = 'block';
+                document.getElementById('upload-box').style.display = 'none';
             }
         });
     }
@@ -77,6 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         formulario.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            const activoToggle = document.getElementById('activo');
             const productoPayload = {
                 nombre: document.getElementById('nombre').value,
                 descripcion: document.getElementById('descripcion').value,
@@ -86,40 +114,40 @@ document.addEventListener('DOMContentLoaded', async () => {
                 sedeGarcia: document.getElementById('sede-garcia').checked,
                 sedeMagdalena: document.getElementById('sede-magdalena').checked,
                 imagen: imagenBase64,
-                activo: true
+                activo: activoToggle ? activoToggle.checked : true
             };
 
             try {
                 let response;
                 if (productoId) {
-                    // Update if editing (PUT)
                     response = await fetch(`${API_BASE_URL}/api/productos/${productoId}`, {
                         method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(productoPayload)
                     });
                 } else {
-                    // Create new (POST)
                     response = await fetch(`${API_BASE_URL}/api/productos`, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(productoPayload)
                     });
                 }
 
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    // Intentar leer el mensaje de error real del servidor
+                    let mensajeServidor = `Error del servidor (${response.status})`;
+                    try {
+                        const errorData = await response.json();
+                        mensajeServidor = errorData.error || errorData.message || mensajeServidor;
+                    } catch (_) { /* el cuerpo no es JSON, ignorar */ }
+                    throw new Error(mensajeServidor);
                 }
 
                 alert(productoId ? '¡Producto actualizado exitosamente!' : '¡Producto creado exitosamente!');
                 window.location.href = 'productos.html';
             } catch (error) {
                 console.error("Error al guardar en el backend Java:", error);
-                alert("Error al guardar el producto. Verifica que el servidor backend esté corriendo.");
+                alert(`Error al guardar el producto:\n${error.message}`);
             }
         });
     }
