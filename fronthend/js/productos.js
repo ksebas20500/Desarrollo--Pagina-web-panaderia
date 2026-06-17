@@ -87,7 +87,9 @@ async function cargarProductosPorCategoria(categoria) {
             
             const cardHtml = `
                 <div class="product-card">
-                    <img src="${imgSrc}" alt="${producto.nombre}" class="product-image">
+                    <div class="product-image-wrapper">
+                        <img src="${imgSrc}" alt="${producto.nombre}" class="product-image">
+                    </div>
                     <div class="product-info">
                         <h3>${producto.nombre}</h3>
                         <p class="product-desc">${descripcion}</p>
